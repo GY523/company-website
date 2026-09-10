@@ -1931,16 +1931,28 @@ h3 {
   background: white;
   gap: 25px;
 }
-.capability-card:hover {
-  background: #fff;
-  border-color: #bcbdcf;
-  box-shadow: 0 8px 28px #22224408;
+.capability-card:is(:hover, :focus-visible) {
+  background: #eef3fa;
+  border-color: #7899c7;
+  box-shadow: 0 12px 30px #315f9f1c;
 }
 .card-number {
   color: #6d6f85;
   font-family: inherit;
   font-size: 0.75rem;
   letter-spacing: 0.08em;
+}
+.capability-card .card-number,
+.capability-card h3,
+.capability-card .card-arrow {
+  transition: color var(--motion-fast);
+}
+.capability-card:is(:hover, :focus-visible) .card-number,
+.capability-card:is(:hover, :focus-visible) .card-arrow {
+  color: var(--red);
+}
+.capability-card:is(:hover, :focus-visible) h3 {
+  color: var(--navy);
 }
 .card-arrow {
   color: var(--blue);
@@ -1958,9 +1970,9 @@ h3 {
   color: var(--text);
   min-height: 138px;
 }
-.capability-featured:hover {
-  background: #fff;
-  border-color: #bcbdcf;
+.capability-featured:is(:hover, :focus-visible) {
+  background: #eef3fa;
+  border-color: #7899c7;
 }
 .capability-featured .card-arrow {
   color: var(--blue);
