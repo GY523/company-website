@@ -1532,6 +1532,25 @@ h3 {
 .site-navigation > .button {
   white-space: nowrap;
 }
+.site-navigation
+  .dropdown
+  a:is(
+    [href="architecture-planning.html"],
+    [href="ip-selection.html"],
+    [href="design-verification.html"],
+    [href="ip-product-development.html"],
+    [href="chip-design.html"]
+  ),
+.site-footer
+  a:is(
+    [href="architecture-planning.html"],
+    [href="ip-selection.html"],
+    [href="design-verification.html"],
+    [href="ip-product-development.html"],
+    [href="chip-design.html"]
+  ) {
+  display: none;
+}
 .v1-hero {
   position: relative;
   text-align: center;
@@ -1539,7 +1558,7 @@ h3 {
   padding: 104px 0 78px;
   background:
     linear-gradient(100deg, #0e0e25ed 5%, #171730c7 52%, #111129d9 100%),
-    url("Home-Background.jpg") center 56% / cover no-repeat;
+    url("assets/images/home-background.jpg") center 56% / cover no-repeat;
   isolation: isolate;
 }
 .v1-hero .eyebrow {
@@ -1981,6 +2000,181 @@ h3 {
 .capability-featured p {
   color: var(--muted);
 }
+.expertise-carousel {
+  overflow: hidden;
+  border: 1px solid #d9deea;
+  border-radius: 18px;
+  background: #fff;
+  box-shadow: 0 20px 55px #171a3612;
+}
+.expertise-slide {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(340px, 0.92fr);
+  min-height: 520px;
+  animation: expertise-enter 0.55s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.expertise-media {
+  min-width: 0;
+  overflow: hidden;
+  background: var(--navy-dark);
+}
+.expertise-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.8s cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.expertise-slide:hover .expertise-media img {
+  transform: scale(1.025);
+}
+.expertise-copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(40px, 5vw, 70px);
+}
+.expertise-kicker {
+  color: #a91f2b;
+  font-size: 0.75rem;
+  font-weight: 750;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+.expertise-copy h3 {
+  max-width: 12ch;
+  margin-top: 18px;
+  color: var(--navy);
+  font-size: clamp(2rem, 3.2vw, 3.25rem);
+  line-height: 1.05;
+}
+.expertise-copy > p:not(.expertise-kicker) {
+  max-width: 46ch;
+  margin-top: 22px;
+  color: var(--muted);
+}
+.expertise-points {
+  display: grid;
+  gap: 10px;
+  margin: 26px 0 18px;
+  padding: 0;
+  color: var(--text);
+  font-size: 0.9375rem;
+  list-style: none;
+}
+.expertise-points li {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.expertise-points li::before {
+  width: 18px;
+  height: 2px;
+  flex: 0 0 auto;
+  background: var(--red);
+  content: "";
+}
+.expertise-copy .text-link {
+  align-self: flex-start;
+  margin-top: auto;
+}
+.expertise-controls {
+  display: flex;
+  align-items: stretch;
+  justify-content: space-between;
+  gap: 24px;
+  border-top: 1px solid #d9deea;
+  background: #f8f9fc;
+}
+.expertise-tabs {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(210px, 1fr));
+  flex: 1;
+}
+.expertise-tab {
+  min-height: 76px;
+  padding: 16px 24px;
+  border: 0;
+  border-right: 1px solid #d9deea;
+  background: transparent;
+  color: var(--muted);
+  font-size: 0.9375rem;
+  font-weight: 650;
+  text-align: left;
+  transition:
+    color var(--motion-fast),
+    background-color var(--motion-fast);
+}
+.expertise-tab span {
+  margin-right: 13px;
+  color: var(--red);
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+}
+.expertise-tab:is(:hover, :focus-visible) {
+  background: #eef3fa;
+  color: var(--navy);
+}
+.expertise-tab.is-active {
+  background: var(--navy);
+  color: #fff;
+}
+.expertise-tab.is-active span {
+  color: #f47b84;
+}
+.expertise-arrows {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 18px 12px 0;
+}
+.expertise-count {
+  min-width: 62px;
+  margin-right: 5px;
+  color: var(--muted);
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+.expertise-arrow {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  place-items: center;
+  border: 1px solid #c7cfdd;
+  border-radius: 50%;
+  background: #fff;
+  color: var(--navy);
+  transition:
+    color var(--motion-fast),
+    background-color var(--motion-fast),
+    border-color var(--motion-fast),
+    transform var(--motion-smooth);
+}
+.expertise-arrow:is(:hover, :focus-visible) {
+  border-color: var(--navy);
+  background: var(--navy);
+  color: #fff;
+  transform: translateY(-2px);
+}
+.expertise-arrow svg {
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+@keyframes expertise-enter {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
 .why-points {
   list-style: none;
   padding: 0;
@@ -2060,6 +2254,27 @@ h3 {
 }
 .page-hero .breadcrumb li + li::before {
   color: #c4c4d7;
+}
+.page-hero-physical,
+.page-hero-analog {
+  position: relative;
+  isolation: isolate;
+  background-position: center;
+  background-size: cover;
+}
+.page-hero-physical {
+  background-image:
+    linear-gradient(100deg, #0e1126ed 8%, #171a36d1 52%, #0e1126c4 100%),
+    url("assets/images/Floor-planning.png");
+}
+.page-hero-analog {
+  background-image:
+    linear-gradient(100deg, #0e1126ed 8%, #171a36d1 52%, #0e1126c4 100%),
+    url("assets/images/v-chip-expertise-custom-analog-design.webp");
+}
+.page-hero-physical h1,
+.page-hero-analog h1 {
+  text-shadow: 0 2px 20px #05050c99;
 }
 .deliverables,
 .contact-panel {
@@ -2145,6 +2360,29 @@ h3 {
   .capability-featured {
     padding-right: 55px;
   }
+  .expertise-slide {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .expertise-media {
+    aspect-ratio: 16 / 9;
+  }
+  .expertise-copy {
+    min-height: 430px;
+    padding: 42px;
+  }
+  .expertise-controls {
+    flex-direction: column;
+    gap: 0;
+  }
+  .expertise-tabs {
+    width: 100%;
+  }
+  .expertise-arrows {
+    justify-content: flex-end;
+    border-top: 1px solid #d9deea;
+    padding: 12px 18px;
+  }
 }
 @media (forced-colors: active) {
   .v1-hero h1 span {
@@ -2225,6 +2463,27 @@ h3 {
   .capability-card {
     min-height: 175px;
     gap: 20px;
+  }
+  .expertise-carousel {
+    border-radius: 14px;
+  }
+  .expertise-media {
+    aspect-ratio: 4 / 3;
+  }
+  .expertise-copy {
+    min-height: 0;
+    padding: 32px 24px;
+  }
+  .expertise-copy h3 {
+    font-size: 2.15rem;
+  }
+  .expertise-tabs {
+    grid-template-columns: 1fr;
+  }
+  .expertise-tab {
+    min-height: 62px;
+    border-right: 0;
+    border-bottom: 1px solid #d9deea;
   }
   .site-navigation > .button {
     white-space: normal;

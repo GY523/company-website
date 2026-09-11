@@ -8,8 +8,12 @@ const types = {
   ".css": "text/css; charset=utf-8",
   ".js": "text/javascript; charset=utf-8",
   ".svg": "image/svg+xml",
+  ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
   ".png": "image/png",
+  ".webp": "image/webp",
+  ".avif": "image/avif",
+  ".gif": "image/gif",
   ".ico": "image/x-icon",
 };
 http

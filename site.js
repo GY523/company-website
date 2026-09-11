@@ -26,6 +26,77 @@
     trustTrack.classList.add("is-ready");
   }
 
+  document.querySelectorAll("[data-expertise-carousel]").forEach((carousel) => {
+    const slides = [...carousel.querySelectorAll("[data-carousel-slide]")];
+    const tabs = [...carousel.querySelectorAll("[data-carousel-to]")];
+    const previous = carousel.querySelector("[data-carousel-prev]");
+    const next = carousel.querySelector("[data-carousel-next]");
+    const count = carousel.querySelector(".expertise-count");
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    let activeIndex = 0;
+    let timer;
+
+    const showSlide = (nextIndex) => {
+      activeIndex = (nextIndex + slides.length) % slides.length;
+      slides.forEach((slide, index) => {
+        const active = index === activeIndex;
+        slide.hidden = !active;
+        slide.classList.toggle("is-active", active);
+        slide.setAttribute("aria-hidden", String(!active));
+      });
+      tabs.forEach((tab, index) => {
+        const active = index === activeIndex;
+        tab.classList.toggle("is-active", active);
+        tab.setAttribute("aria-selected", String(active));
+        tab.tabIndex = active ? 0 : -1;
+      });
+      if (count) {
+        count.textContent = `${String(activeIndex + 1).padStart(2, "0")} / ${String(slides.length).padStart(2, "0")}`;
+      }
+    };
+
+    const stopAutoPlay = () => window.clearInterval(timer);
+    const startAutoPlay = () => {
+      stopAutoPlay();
+      if (!reducedMotion.matches && slides.length > 1) {
+        timer = window.setInterval(() => showSlide(activeIndex + 1), 8000);
+      }
+    };
+
+    tabs.forEach((tab, index) => {
+      tab.addEventListener("click", () => {
+        showSlide(index);
+        startAutoPlay();
+      });
+      tab.addEventListener("keydown", (event) => {
+        if (!["ArrowLeft", "ArrowRight"].includes(event.key)) return;
+        event.preventDefault();
+        const direction = event.key === "ArrowRight" ? 1 : -1;
+        const target = (index + direction + tabs.length) % tabs.length;
+        showSlide(target);
+        tabs[target].focus();
+        startAutoPlay();
+      });
+    });
+    previous?.addEventListener("click", () => {
+      showSlide(activeIndex - 1);
+      startAutoPlay();
+    });
+    next?.addEventListener("click", () => {
+      showSlide(activeIndex + 1);
+      startAutoPlay();
+    });
+    carousel.addEventListener("pointerenter", stopAutoPlay);
+    carousel.addEventListener("pointerleave", startAutoPlay);
+    carousel.addEventListener("focusin", stopAutoPlay);
+    carousel.addEventListener("focusout", (event) => {
+      if (!carousel.contains(event.relatedTarget)) startAutoPlay();
+    });
+    reducedMotion.addEventListener("change", startAutoPlay);
+    showSlide(0);
+    startAutoPlay();
+  });
+
   const header = document.querySelector(".site-header");
   const navigation = document.querySelector(".site-navigation");
   const toggle = document.querySelector(".menu-toggle");
