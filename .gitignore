@@ -1,3 +1,4 @@
 node_modules/
 .qa/
 .pnpm-store/
+*prompt.txt
