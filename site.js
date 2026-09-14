@@ -26,6 +26,20 @@
     trustTrack.classList.add("is-ready");
   }
 
+  document.querySelectorAll(".hero-video-media").forEach((video) => {
+    const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => {
+      if (reducedMotion.matches || document.hidden) {
+        video.pause();
+      } else {
+        video.play().catch(() => {});
+      }
+    };
+    reducedMotion.addEventListener("change", sync);
+    document.addEventListener("visibilitychange", sync);
+    sync();
+  });
+
   document.querySelectorAll("[data-expertise-carousel]").forEach((carousel) => {
     const slides = [...carousel.querySelectorAll("[data-carousel-slide]")];
     const tabs = [...carousel.querySelectorAll("[data-carousel-to]")];
