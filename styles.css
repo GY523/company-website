@@ -1617,12 +1617,21 @@ h3 {
 }
 .welcome-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
+  align-items: stretch;
+  gap: 48px;
+}
+.welcome-copy {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) repeat(2, minmax(0, 1fr)) max-content;
   align-items: center;
-  gap: 90px;
+  gap: 32px;
+}
+.welcome-copy .section-copy {
+  margin-top: 0;
 }
 .welcome-copy .button {
-  margin-top: 28px;
+  margin-top: 0;
 }
 .trust-strip {
   position: relative;
@@ -1698,6 +1707,10 @@ h3 {
   }
 }
 .stats-panel {
+  display: grid;
+  grid-template-columns: minmax(220px, 0.8fr) minmax(0, 1.2fr);
+  align-items: center;
+  gap: 32px;
   min-width: 0;
   padding: 34px;
   border: 1px solid #ffffff14;
@@ -1729,15 +1742,16 @@ h3 {
 }
 .stats-intro {
   max-width: 39ch;
-  min-height: 86px;
-  margin-top: 17px;
+  min-height: 0;
+  margin-top: 0;
   color: #b7b9c7;
   font-size: 0.9375rem;
   line-height: 1.6;
 }
 .stats-grid {
+  grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 14px;
   perspective: 1200px;
 }
@@ -2326,6 +2340,14 @@ h3 {
     border-color: #ffffff26;
   }
 }
+@media (max-width: 1000px) {
+  .welcome-copy {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .welcome-copy .button {
+    justify-self: start;
+  }
+}
 @media (max-width: 800px) {
   .v1-hero {
     padding-top: 60px;
@@ -2345,7 +2367,20 @@ h3 {
     gap: 34px;
   }
   .welcome-copy {
+    grid-template-columns: minmax(0, 1fr);
     grid-row: 1;
+  }
+  .welcome-copy .section-copy {
+    margin-top: 0;
+  }
+  .welcome-copy .button {
+    margin-top: 4px;
+  }
+  .stats-panel {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .stats-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
   .welcome-grid .hero-diagram {
     max-width: 560px;
@@ -2449,7 +2484,7 @@ h3 {
     padding: 28px 22px;
   }
   .stats-intro {
-    min-height: 72px;
+    min-height: 0;
   }
   .stat-card {
     min-height: 154px;
