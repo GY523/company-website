@@ -15,6 +15,8 @@ const types = {
   ".avif": "image/avif",
   ".gif": "image/gif",
   ".ico": "image/x-icon",
+  ".mp4": "video/mp4",
+  ".webm": "video/webm",
 };
 http
   .createServer((req, res) => {
