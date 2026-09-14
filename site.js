@@ -26,12 +26,16 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll(
-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede",
+      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row",
     ).forEach((element) => {
       // Flip cards and carousel slides already have their own transitions.
       if (element.closest(".stat-card, .expertise-slide")) return;
       if (element.matches(".lede")) {
         element.style.setProperty("--reveal-delay", "100ms");
+      } else if (element.matches(".hero-badge-row")) {
+        element.style.setProperty("--reveal-delay", "200ms");
+      } else if (element.matches(".page-hero-video .button-row")) {
+        element.style.setProperty("--reveal-delay", "300ms");
       } else if (element.matches(".button-row")) {
         element.style.setProperty("--reveal-delay", "200ms");
       }

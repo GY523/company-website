@@ -910,7 +910,7 @@ main:focus {
 }
 .careers-list {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  grid-template-columns: repeat(3, 1fr);
   gap: 22px;
   padding: 0;
   margin-top: 8px;
@@ -991,8 +991,8 @@ main:focus {
   margin-top: auto;
   padding-top: 18px;
   color: var(--blue);
-  font-size: 0.9375rem;
-  font-weight: 600;
+  font-size: 1.0625rem;
+  font-weight: 700;
 }
 .career-note {
   font-size: 0.9375rem;
@@ -1094,6 +1094,9 @@ main:focus {
   .company-grid,
   .contact-grid {
     gap: 60px;
+  }
+  .careers-list {
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 @media (max-width: 1300px) {
@@ -2650,6 +2653,10 @@ h3 {
 }
 .page-hero-video .eyebrow {
   color: #f06b76;
+  font-size: 1rem;
+}
+.page-hero-video {
+  --motion-reveal: 1s cubic-bezier(0.2, 0.7, 0.2, 1);
 }
 .page-hero-video h1 {
   color: #fff;
@@ -2668,20 +2675,21 @@ h3 {
 .hero-badge {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  padding: 9px 16px;
+  gap: 9px;
+  padding: 11px 20px;
   border: 1px solid #ffffff2e;
   border-radius: 999px;
   background: #ffffff14;
   backdrop-filter: blur(6px);
   color: #eef1fb;
-  font-size: 0.8125rem;
-  font-weight: 600;
+  font-size: 1.0625rem;
+  font-weight: 650;
   letter-spacing: 0.02em;
 }
 .hero-badge svg {
-  width: 15px;
-  height: 15px;
+  width: 18px;
+  height: 18px;
+  flex-shrink: 0;
   fill: none;
   stroke: #f06b76;
   stroke-width: 2;
@@ -2745,8 +2753,8 @@ h3 {
     padding-block: 104px 56px;
   }
   .hero-badge {
-    font-size: 0.75rem;
-    padding: 8px 13px;
+    font-size: 0.875rem;
+    padding: 9px 15px;
   }
 }
 @media (prefers-reduced-motion: reduce) {
