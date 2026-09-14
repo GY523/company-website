@@ -1,16 +1,24 @@
 # Hero background videos
 
 The About and Careers pages are wired up to play a looping background
-video behind the page hero (`.page-hero-video` in `styles.css`). No
-footage is checked into the repo yet — until a file is added, visitors
-just see the poster image (`assets/images/home-background.jpg`), so the
-site still looks complete.
+video behind the page hero (`.page-hero-video` in `styles.css`).
 
-Drop your clips in here with these exact filenames and they'll start
-playing automatically, no code changes needed:
+- `about-hero.mp4` — used on `about.html`. **In place** (a CPU/circuit
+  animation, compressed from 25.7MB to ~5MB — see below). Poster frame:
+  `assets/images/about-hero-poster.jpg`, extracted straight from the
+  video so there's no flash of a different image before playback starts.
+- `careers-hero.mp4` — used on `careers.html`. **Not added yet** — until
+  this file exists, visitors just see the poster image
+  (`assets/images/home-background.jpg`), so the page still looks
+  complete. Drop a clip in with this exact filename and it'll start
+  playing automatically, no code changes needed.
 
-- `about-hero.mp4` — used on `about.html`
-- `careers-hero.mp4` — used on `careers.html`
+The video element also gets `filter: brightness(0.4) saturate(1.05)`
+plus a dark gradient scrim (both in `styles.css`, under
+`.hero-video-media` / `.page-hero-video::before`) so bright or busy
+footage never fights the heading text for contrast. Keep that in mind
+if you swap in new footage — brighter source video is fine, the filter
+absorbs it.
 
 ## Recommended specs
 
@@ -21,7 +29,7 @@ playing automatically, no code changes needed:
   muted)
 - File size: keep it under ~6-8MB so the hero loads quickly. Trim/compress
   with `ffmpeg`, e.g.:
-  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 28 -preset slow -movflags +faststart about-hero.mp4`
+  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart careers-hero.mp4`
 - Content ideas: clean room / fab floor, chip wafer close-ups, PCB or die
   macro shots, engineers at workstations — anything that reads as
   "silicon engineering" without distracting from the text on top
