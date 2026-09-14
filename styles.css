@@ -1000,7 +1000,6 @@ main:focus {
   color: var(--blue);
   font-size: 1.0625rem;
   font-weight: 700;
-  transition: color var(--motion-fast);
 }
 .career-note {
   font-size: 0.9375rem;
