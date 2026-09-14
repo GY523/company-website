@@ -5,15 +5,47 @@
     ecosystemSlot.replaceWith(ecosystemPanel);
   }
 
-  document.querySelectorAll(".ecosystem-row").forEach((row) => {
-    const set = row.querySelector(".ecosystem-set");
-    if (!set) return;
+  if (ecosystemPanel && "IntersectionObserver" in window) {
+    const ecosystemObserver = new IntersectionObserver((entries) => {
+      if (entries.some((entry) => entry.isIntersecting)) {
+        ecosystemPanel.classList.add("is-visible");
+        ecosystemObserver.disconnect();
+      }
+    }, { threshold: 0.15 });
+    ecosystemObserver.observe(ecosystemPanel);
+  }
 
-    const duplicate = set.cloneNode(true);
-    duplicate.setAttribute("aria-hidden", "true");
-    row.append(duplicate);
-    row.classList.add("is-ready");
-  });
+  const revealMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+  if ("IntersectionObserver" in window && !revealMotion.matches) {
+    const headingObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add("content-reveal");
+        headingObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll(
+      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede",
+    ).forEach((element) => {
+      // Flip cards and carousel slides already have their own transitions.
+      if (element.closest(".stat-card, .expertise-slide")) return;
+      if (element.matches(".lede")) {
+        element.style.setProperty("--reveal-delay", "100ms");
+      } else if (element.matches(".button-row")) {
+        element.style.setProperty("--reveal-delay", "200ms");
+      }
+      headingObserver.observe(element);
+    });
+
+    revealMotion.addEventListener("change", (event) => {
+      if (!event.matches) return;
+      headingObserver.disconnect();
+      document.querySelectorAll(".content-reveal").forEach((element) => {
+        element.classList.remove("content-reveal");
+      });
+    });
+  }
 
   const trustTrack = document.querySelector(".trust-track");
   const trustList = trustTrack?.querySelector(".trust-list");
