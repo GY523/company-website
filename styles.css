@@ -1021,6 +1021,11 @@ main:focus {
   background: var(--navy-dark);
   color: #c2d2e2;
 }
+.site-footer .container {
+  width: 100%;
+  max-width: none;
+  margin-inline: 0;
+}
 .footer-grid {
   display: grid;
   grid-template-columns: 1.4fr 1.4fr 0.75fr 1fr;
@@ -3105,6 +3110,10 @@ h3 {
 }
 .section-band-blue .career-note a {
   color: #fff;
+}
+/* About "How we work" override: match the About hero's dark navy instead of blue. */
+.section-band-navy {
+  background: var(--navy-dark);
 }
 
 /* Homepage "Our Expertise" showcase grid */
