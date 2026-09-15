@@ -2848,8 +2848,56 @@ h3 {
 .why-layout .why-points {
   margin-top: 0;
 }
-.why-layout .why-points li:first-child {
-  padding-top: 0;
+.why-layout .why-points li {
+  position: relative;
+  min-height: 120px;
+  padding-block: 30px;
+  cursor: pointer;
+  transition:
+    padding var(--motion-smooth),
+    background-color var(--motion-fast),
+    border-color var(--motion-fast);
+}
+.why-layout .why-points li:focus {
+  outline: none;
+}
+.why-layout .why-points li:focus-visible {
+  outline: 3px solid #315f9f;
+  outline-offset: 6px;
+  border-radius: 4px;
+}
+.why-layout .why-points li > span {
+  min-width: 36px;
+  margin-top: 8px;
+  font-size: 0.9rem;
+  font-weight: 700;
+}
+.why-layout .why-points h3 {
+  font-size: clamp(1.65rem, 2.5vw, 2.35rem);
+  line-height: 1.1;
+  transition: color var(--motion-fast);
+}
+.why-layout .why-points p {
+  max-height: 0;
+  max-width: 54ch;
+  margin-top: 0;
+  overflow: hidden;
+  opacity: 0;
+  transform: translateY(-6px);
+  transition:
+    max-height 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    margin-top var(--motion-smooth),
+    opacity var(--motion-smooth),
+    transform var(--motion-smooth);
+}
+.why-layout .why-points li:is(:hover, :focus, :focus-within) h3 {
+  color: var(--red);
+}
+.why-layout .why-points li:is(:hover, :focus, :focus-within) p {
+  max-height: 140px;
+  margin-top: 14px;
+  opacity: 1;
+  transform: translateY(0);
 }
 
 @media (max-width: 800px) {
