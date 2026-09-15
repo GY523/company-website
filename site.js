@@ -1,9 +1,5 @@
 (() => {
   const ecosystemPanel = document.querySelector(".ecosystem-panel");
-  const ecosystemSlot = document.querySelector(".ecosystem-slot");
-  if (ecosystemPanel && ecosystemSlot) {
-    ecosystemSlot.replaceWith(ecosystemPanel);
-  }
 
   if (ecosystemPanel && "IntersectionObserver" in window) {
     const ecosystemObserver = new IntersectionObserver((entries) => {
