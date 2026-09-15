@@ -1718,7 +1718,7 @@ h3 {
 .trust-strip {
   position: relative;
   z-index: 1;
-  padding-block: 29px;
+  padding-block: 44px;
   border-block: 1px solid var(--line);
   background: #fff;
   box-shadow: 0 12px 30px #171a3608;
@@ -1731,8 +1731,8 @@ h3 {
 }
 .trust-label {
   color: #a91f2b;
-  font-size: 0.75rem;
-  font-weight: 650;
+  font-size: 0.875rem;
+  font-weight: 700;
   letter-spacing: 0.16em;
   text-transform: uppercase;
 }
@@ -1755,7 +1755,7 @@ h3 {
   );
 }
 .trust-track {
-  --trust-cycle-gap: 64px;
+  --trust-cycle-gap: 76px;
   display: flex;
   width: max-content;
   gap: var(--trust-cycle-gap);
@@ -1764,21 +1764,21 @@ h3 {
   display: flex;
   flex: 0 0 auto;
   align-items: center;
-  gap: 48px;
+  gap: 56px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 .trust-track.is-ready .trust-list {
-  animation: trust-scroll 28s linear infinite;
+  animation: trust-scroll 32s linear infinite;
 }
 .trust-viewport:hover .trust-list {
   animation-play-state: paused;
 }
 .trust-list li {
-  color: #66748f;
-  font-size: 0.9375rem;
-  font-weight: 700;
+  color: #4a5872;
+  font-size: 1.5rem;
+  font-weight: 800;
   letter-spacing: -0.01em;
   text-align: center;
   white-space: nowrap;
@@ -2470,10 +2470,13 @@ h3 {
     gap: 17px;
   }
   .trust-track {
-    --trust-cycle-gap: 42px;
+    --trust-cycle-gap: 48px;
   }
   .trust-list {
-    gap: 34px;
+    gap: 38px;
+  }
+  .trust-list li {
+    font-size: 1.1875rem;
   }
   .welcome-copy {
     grid-template-columns: minmax(0, 1fr);
