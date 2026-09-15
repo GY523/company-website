@@ -3148,3 +3148,89 @@ h3 {
 .section-band-blue .career-note a {
   color: #fff;
 }
+
+/* Homepage "Our Expertise" showcase grid */
+.expertise-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: #0d0d10;
+}
+.expertise-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, #ffffff14 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.expertise-showcase > .container {
+  position: relative;
+  z-index: 1;
+}
+.expertise-showcase .centered-heading h2 {
+  color: #fff;
+}
+.expertise-showcase .centered-heading p {
+  color: #9a9aa5;
+}
+.expertise-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.expertise-showcase-card {
+  display: block;
+  padding: 32px 28px;
+  border-radius: 14px;
+  background: #17171c;
+  border: 1px solid #2a2a32;
+  transition:
+    border-color var(--motion-smooth),
+    background-color var(--motion-smooth),
+    transform var(--motion-smooth);
+}
+.expertise-showcase-card:hover {
+  border-color: #3a4a63;
+  background: #1c1c22;
+  transform: translateY(-4px);
+}
+.expertise-showcase-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: var(--red);
+}
+.expertise-showcase-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.expertise-showcase-card h3 {
+  color: #fff;
+  font-size: 1.3125rem;
+  font-weight: 700;
+  max-width: none;
+  margin-bottom: 12px;
+}
+.expertise-showcase-card p {
+  color: #9a9aa5;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .expertise-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .expertise-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
