@@ -2005,6 +2005,9 @@ h3 {
   .content-reveal:focus-within {
     animation: none;
   }
+  .expertise-showcase-card.content-reveal {
+    animation-name: expertise-card-slide-in;
+  }
 }
 @keyframes content-rise {
   from {
@@ -2014,6 +2017,16 @@ h3 {
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+@keyframes expertise-card-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(-32px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
   }
 }
 @keyframes ecosystem-rise {
@@ -3195,4 +3208,229 @@ h3 {
 }
 .section-band-blue .career-note a {
   color: #fff;
+}
+
+/* Homepage "Our Expertise" showcase grid */
+.expertise-showcase {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  background: var(--navy-dark);
+  --motion-reveal: 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+.expertise-showcase::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background-image: radial-gradient(circle, #ffffff14 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+.expertise-showcase > .container {
+  position: relative;
+  z-index: 1;
+}
+.expertise-showcase .centered-heading h2 {
+  color: #fff;
+}
+.expertise-showcase-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  margin-top: 48px;
+}
+.expertise-showcase-grid > :nth-child(1) { --reveal-delay: 0ms; }
+.expertise-showcase-grid > :nth-child(2) { --reveal-delay: 80ms; }
+.expertise-showcase-grid > :nth-child(3) { --reveal-delay: 160ms; }
+.expertise-showcase-grid > :nth-child(4) { --reveal-delay: 80ms; }
+.expertise-showcase-grid > :nth-child(5) { --reveal-delay: 160ms; }
+.expertise-showcase-grid > :nth-child(6) { --reveal-delay: 240ms; }
+.expertise-showcase-card {
+  display: block;
+  padding: 32px 28px;
+  border-radius: 14px;
+  background: var(--navy);
+  border: 1px solid #1e3a5f;
+  transition:
+    border-color var(--motion-smooth),
+    background-color var(--motion-smooth),
+    transform var(--motion-smooth);
+}
+.expertise-showcase-card:hover {
+  border-color: #3a6ea8;
+  background: #15375f;
+  transform: translateY(-4px);
+}
+.expertise-showcase-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 20px;
+  color: #fff;
+}
+.expertise-showcase-icon svg {
+  width: 40px;
+  height: 40px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.expertise-showcase-card h3 {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 800;
+  max-width: none;
+  margin-bottom: 14px;
+}
+.expertise-showcase-card p {
+  color: #c2d2e2;
+  font-size: 1.0625rem;
+  font-weight: 500;
+  line-height: 1.6;
+}
+@media (max-width: 900px) {
+  .expertise-showcase-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 560px) {
+  .expertise-showcase-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Floating contact / scroll-to-top actions (all pages) */
+.floating-actions {
+  position: fixed;
+  right: 24px;
+  bottom: 24px;
+  z-index: 90;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+}
+.floating-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  border: none;
+  border-radius: 50%;
+  background: var(--red);
+  color: #fff;
+  box-shadow: 0 10px 24px #17203633;
+  transition:
+    background-color var(--motion-fast),
+    transform var(--motion-smooth),
+    box-shadow var(--motion-smooth);
+}
+.floating-action svg {
+  width: 22px;
+  height: 22px;
+  fill: none;
+  stroke: currentColor;
+  stroke-width: 2;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+.floating-action:hover {
+  background: var(--red-hover);
+  transform: translateY(-3px);
+  box-shadow: 0 14px 28px #17203640;
+}
+.floating-top {
+  background: var(--navy);
+}
+.floating-top:hover {
+  background: var(--blue);
+}
+.floating-top[hidden] {
+  display: none;
+}
+/* Standalone fixed layer (sibling of .floating-actions, not nested inside
+   it) so mix-blend-mode composites against the real page behind it rather
+   than being isolated inside .floating-actions' own stacking context. */
+.floating-contact-label {
+  position: fixed;
+  right: 90px;
+  bottom: 50px;
+  transform: translateY(50%);
+  z-index: 90;
+  width: 11ch;
+  text-align: left;
+  color: #fff;
+  mix-blend-mode: difference;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+.floating-contact-label-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: top;
+  width: 0;
+  border-right: 2px solid #fff;
+}
+@media (max-width: 480px) {
+  .floating-actions {
+    right: 16px;
+    bottom: 16px;
+    gap: 10px;
+  }
+  .floating-action {
+    width: 46px;
+    height: 46px;
+  }
+  .floating-action svg {
+    width: 19px;
+    height: 19px;
+  }
+  .floating-contact-label {
+    right: 72px;
+    bottom: 39px;
+    font-size: 0.875rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-action {
+    transition: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .floating-contact-label-text {
+    animation:
+      floating-typewriter 5s steps(10, end) infinite,
+      floating-cursor-blink 0.8s step-end infinite;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-contact-label-text {
+    width: 11ch;
+    border-right-color: transparent;
+  }
+}
+@keyframes floating-typewriter {
+  0% {
+    width: 0;
+  }
+  35% {
+    width: 11ch;
+  }
+  65% {
+    width: 11ch;
+  }
+  100% {
+    width: 0;
+  }
+}
+@keyframes floating-cursor-blink {
+  50% {
+    border-color: transparent;
+  }
 }
