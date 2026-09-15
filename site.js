@@ -22,10 +22,16 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll(
-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row",
+      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card",
     ).forEach((element) => {
       // Flip cards and carousel slides already have their own transitions.
       if (element.closest(".stat-card, .expertise-slide")) return;
+      // The card itself handles its own entrance; skip its inner heading.
+      if (
+        element.matches("h1, h2, h3") &&
+        element.closest(".expertise-showcase-card")
+      )
+        return;
       if (element.matches(".lede")) {
         element.style.setProperty("--reveal-delay", "100ms");
       } else if (element.matches(".hero-badge-row")) {
