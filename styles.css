@@ -2639,7 +2639,8 @@ h3 {
 .v1-hero-carousel .expertise-slide {
   position: relative;
   display: block;
-  min-height: clamp(600px, calc(100svh - 88px), 780px);
+  min-height: 100vh;
+  min-height: 100svh;
 }
 .v1-hero-carousel .expertise-slide::after {
   position: absolute;
@@ -2665,7 +2666,8 @@ h3 {
   align-items: center;
   justify-content: center;
   width: min(var(--container), calc(100% - 190px));
-  min-height: clamp(600px, calc(100svh - 88px), 780px);
+  min-height: 100vh;
+  min-height: 100svh;
   margin-inline: auto;
   padding: 90px 0 130px;
   color: #fff;
@@ -2916,7 +2918,8 @@ h3 {
 @media (max-width: 800px) {
   .v1-hero-carousel .expertise-slide,
   .v1-hero-carousel .expertise-copy {
-    min-height: 620px;
+    min-height: 100vh;
+    min-height: 100svh;
   }
   .v1-hero-carousel .expertise-copy {
     width: min(100% - 88px, 620px);
