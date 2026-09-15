@@ -53,6 +53,23 @@
     });
   }
 
+  const scrollTopButton = document.querySelector("[data-scroll-top]");
+  if (scrollTopButton) {
+    const toggleScrollTop = () => {
+      scrollTopButton.hidden = window.scrollY < 400;
+    };
+    window.addEventListener("scroll", toggleScrollTop, { passive: true });
+    toggleScrollTop();
+    scrollTopButton.addEventListener("click", () => {
+      window.scrollTo({
+        top: 0,
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+      });
+    });
+  }
+
   const trustTrack = document.querySelector(".trust-track");
   const trustList = trustTrack?.querySelector(".trust-list");
   if (trustTrack && trustList) {
