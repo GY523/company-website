@@ -114,31 +114,120 @@
       </div>
     </header>
     <main id="main" tabindex="-1">
-      <section class="v1-hero">
-        <div class="container">
-          <h1>From concept.<br>To <span>silicon success.</span></h1>
-          <p class="lede">
-            We carry your chip from first sketch to shipped silicon, with architecture, verification, 
-            and implementation driven by one connected engineering team in Penang.
-          </p>
-          <div class="button-row">
-            <a class="button" href="#capabilities">Explore Our Expertise</a>
+      <section class="v1-hero v1-hero-carousel" aria-label="V-Chip expertise">
+        <section
+          class="expertise-carousel"
+          data-expertise-carousel
+          aria-roledescription="carousel"
+          aria-label="V-Chip expertise"
+        >
+          <div class="expertise-slides">
+            <article
+              class="expertise-slide is-active"
+              data-carousel-slide
+              role="group"
+              aria-roledescription="slide"
+              aria-label="1 of 2: Physical Design"
+            >
+              <div class="expertise-media">
+                <img
+                  src="assets/images/Floor-planning.png"
+                  alt="Semiconductor die with dense blue and red physical-design routing layers"
+                  width="800"
+                  height="600"
+                >
+              </div>
+              <div class="expertise-copy">
+                <p class="expertise-kicker">01 / Physical Design</p>
+                <h1>From floorplan to sign-off.</h1>
+                <p>
+                  Move a verified netlist through implementation with a team
+                  focused on timing, power, area, and manufacturability.
+                </p>
+                <ul class="expertise-points">
+                  <li>Floorplanning &amp; power planning</li>
+                  <li>Place-and-route &amp; timing closure</li>
+                  <li>Physical verification &amp; GDS-II sign-off</li>
+                </ul>
+                <a class="button" href="physical-design.html">Explore Physical Design</a>
+              </div>
+            </article>
+            <article
+              class="expertise-slide"
+              data-carousel-slide
+              role="group"
+              aria-roledescription="slide"
+              aria-label="2 of 2: Custom Analog Design"
+              hidden
+            >
+              <div class="expertise-media">
+                <img
+                  src="assets/images/v-chip-expertise-custom-analog-design.webp"
+                  alt="Precision analog circuitry carrying luminous blue and red signal paths"
+                  width="800"
+                  height="600"
+                >
+              </div>
+              <div class="expertise-copy">
+                <p class="expertise-kicker">02 / Custom Analog Design</p>
+                <h1>Analog design around your requirements.</h1>
+                <p>
+                  Develop transistor-level analog and mixed-signal circuits
+                  around performance, power, area, and process targets.
+                </p>
+                <ul class="expertise-points">
+                  <li>PLL &amp; clock generation design</li>
+                  <li>High-speed ADC/DAC design</li>
+                  <li>Power management &amp; analog front ends</li>
+                </ul>
+                <a class="button" href="analog-design.html">Explore Custom Analog Design</a>
+              </div>
+            </article>
           </div>
-        </div>
+          <div class="expertise-controls">
+            <div class="expertise-arrows">
+              <button class="expertise-arrow" type="button" data-carousel-prev aria-label="Previous expertise">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"></path></svg>
+              </button>
+              <button class="expertise-arrow" type="button" data-carousel-next aria-label="Next expertise">
+                <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"></path></svg>
+              </button>
+            </div>
+          </div>
+        </section>
       </section>
 
       <section class="section welcome-section" id="welcome">
         <div class="container welcome-grid">
+          <div class="welcome-intro">
+            <figure class="welcome-media">
+              <img
+                src="assets/images/home-background.jpg"
+                alt="Close view of an illuminated semiconductor chip"
+                width="1200"
+                height="800"
+              >
+            </figure>
+            <div class="welcome-copy">
+              <p class="eyebrow">Welcome to V-Chip</p>
+              <h2>Your vision.<br>Our engineering.</h2>
+              <p class="section-copy">
+                We take complex chip requirements and turn them into a clear,
+                connected path to silicon, bringing together every discipline
+                your design needs to keep moving forward.
+              </p>
+              <p class="section-copy">
+                Engage us for an individual design stage or a full turnkey
+                program, with support from our Penang team.
+              </p>
+              <a class="button button-secondary" href="about.html">Discover V-Chip</a>
+            </div>
+          </div>
           <section class="stats-panel" aria-labelledby="stats-title">
             <div class="stats-heading">
               <p class="eyebrow">V-Chip at a glance</p>
               <h2 id="stats-title">Specialist depth. Connected delivery.</h2>
             </div>
-            <p class="stats-intro">
-              We bring specialist engineering disciplines together under one
-              roof, so your chip moves from architecture to silicon without
-              losing momentum at the handoffs.
-            </p>
             <div class="stats-grid" id="stats-grid">
               <article class="stat-card" tabindex="0">
                 <div class="stat-card-inner">
@@ -212,78 +301,6 @@
               </article>
             </div>
           </section>
-          <section class="ecosystem-panel" aria-labelledby="ecosystem-title">
-            <div class="ecosystem-heading">
-              <p class="eyebrow">Across the silicon landscape</p>
-              <h2 id="ecosystem-title">Technology ecosystems we work across</h2>
-              <p>
-                Experience across the platforms, tools, and industries shaping
-                the next generation of silicon.
-              </p>
-            </div>
-
-            <ul class="ecosystem-grid">
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <path
-                    d="M17.5 19H7a5 5 0 1 1 1-9.9A7 7 0 0 1 21 12.5 4.5 4.5 0 0 1 17.5 19Z"
-                  ></path>
-                </svg>
-                Cloud infrastructure
-              </li>
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <circle cx="12" cy="12" r="3"></circle>
-                  <circle cx="12" cy="12" r="8"></circle>
-                  <path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path>
-                </svg>
-                Sensing
-              </li>
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <path
-                    d="M3 21V9l6 4V9l6 4V3h6v18zM7 17h.01M12 17h.01M17 17h.01"
-                  ></path>
-                </svg>
-                Industrial
-              </li>
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <rect x="6" y="2" width="12" height="20" rx="3"></rect>
-                  <path d="M10 5h4M11 18h2"></path>
-                </svg>
-                Smart devices
-              </li>
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <rect x="4" y="7" width="16" height="13" rx="3"></rect>
-                  <path d="M9 12h.01M15 12h.01M9 16h6M12 7V3M10 3h4"></path>
-                </svg>
-                Robotics
-              </li>
-              <li class="ecosystem-item">
-                <svg aria-hidden="true" viewBox="0 0 24 24">
-                  <path d="M4 19V5M4 12h5l3-5 4 10 2-5h2"></path>
-                </svg>
-                Automation
-              </li>
-            </ul>
-          </section>
-          <div class="welcome-copy">
-            <h2>Your vision.<br>Our engineering.</h2>
-            <p class="section-copy">
-              We take complex chip requirements and turn them into a clear,
-              connected path to silicon, bringing together every discipline
-              your design needs to keep moving forward.
-            </p>
-            <p class="section-copy">
-              Engage us for an individual design stage or a full turnkey
-              program, with support from our Penang team.
-            </p>
-            <a class="button button-secondary" href="about.html"
-              >Discover V-Chip
-            </a>
-          </div>
         </div>
       </section>
 
@@ -306,160 +323,37 @@
         </div>
       </section>
 
-      <section class="section expertise-section" id="capabilities">
+      <section class="section expertise-section capabilities-section" id="capabilities">
         <div class="container">
-          <div class="section-heading centered-heading">
+          <div class="section-heading capabilities-heading">
             <p class="eyebrow">What we do best</p>
-            <h2>Expertise at every stage.</h2>
-            <p>Specialist capabilities. A connected approach to chip design.</p>
+            <h2>Expertise and capabilities under one roof.</h2>
           </div>
-          <section
-            class="expertise-carousel"
-            data-expertise-carousel
-            aria-roledescription="carousel"
-            aria-label="V-Chip expertise"
-          >
-            <div class="expertise-slides">
-              <article
-                class="expertise-slide is-active"
-                data-carousel-slide
-                role="group"
-                aria-roledescription="slide"
-                aria-label="1 of 2: Physical Design"
-              >
-                <div class="expertise-media">
-                  <img
-                    src="assets/images/Floor-planning.png"
-                    alt="Semiconductor die with dense blue and red physical-design routing layers"
-                    width="800"
-                    height="600"
-                 >
-                </div>
-                <div class="expertise-copy">
-                  <p class="expertise-kicker">01 / Physical Design</p>
-                  <h3>From floorplan to sign-off.</h3>
-                  <p>
-                    Move a verified netlist through implementation with a team
-                    focused on timing, power, area, and manufacturability.
-                  </p>
-                  <ul class="expertise-points">
-                    <li>Floorplanning &amp; power planning</li>
-                    <li>Place-and-route &amp; timing closure</li>
-                    <li>Physical verification &amp; GDS-II sign-off</li>
-                  </ul>
-                  <a class="text-link" href="physical-design.html"
-                    >Explore Physical Design
-                    <svg
-                      class="link-arrow"
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M7 17 17 7M7 7h10v10"></path></svg
-                  ></a>
-                </div>
-              </article>
-              <article
-                class="expertise-slide"
-                data-carousel-slide
-                role="group"
-                aria-roledescription="slide"
-                aria-label="2 of 2: Custom Analog Design"
-                hidden
-              >
-                <div class="expertise-media">
-                  <img
-                    src="assets/images/v-chip-expertise-custom-analog-design.webp"
-                    alt="Precision analog circuitry carrying luminous blue and red signal paths"
-                    width="800"
-                    height="600"
-                 >
-                </div>
-                <div class="expertise-copy">
-                  <p class="expertise-kicker">02 / Custom Analog Design</p>
-                  <h3>Analog design around your requirements.</h3>
-                  <p>
-                    Develop transistor-level analog and mixed-signal circuits
-                    around performance, power, area, and process targets.
-                  </p>
-                  <ul class="expertise-points">
-                    <li>PLL &amp; clock generation design</li>
-                    <li>High-speed ADC/DAC design</li>
-                    <li>Power management &amp; analog front ends</li>
-                  </ul>
-                  <a class="text-link" href="analog-design.html"
-                    >Explore Custom Analog Design
-                    <svg
-                      class="link-arrow"
-                      aria-hidden="true"
-                      focusable="false"
-                      viewBox="0 0 24 24"
-                    >
-                      <path d="M7 17 17 7M7 7h10v10"></path></svg
-                  ></a>
-                </div>
-              </article>
+          <section class="ecosystem-panel" aria-labelledby="ecosystem-title">
+            <div class="ecosystem-heading">
+              <p class="eyebrow">What we bring</p>
+              <h3 id="ecosystem-title">Capabilities under one roof</h3>
+              <p>Analog layout, digital PD and DFT, delivered by one team in Penang.</p>
             </div>
-            <div class="expertise-controls">
-              <div
-                class="expertise-tabs"
-                role="tablist"
-                aria-label="Select an expertise"
-              >
-                <button
-                  class="expertise-tab is-active"
-                  type="button"
-                  role="tab"
-                  aria-selected="true"
-                  data-carousel-to="0"
-                >
-                  <span>01</span> Physical Design
-                </button>
-                <button
-                  class="expertise-tab"
-                  type="button"
-                  role="tab"
-                  aria-selected="false"
-                  tabindex="-1"
-                  data-carousel-to="1"
-                >
-                  <span>02</span> Custom Analog Design
-                </button>
-              </div>
-              <div class="expertise-arrows">
-                <span class="expertise-count" aria-live="polite">01 / 02</span>
-                <button
-                  class="expertise-arrow"
-                  type="button"
-                  data-carousel-prev
-                  aria-label="Previous expertise"
-                >
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="m15 18-6-6 6-6"></path>
-                  </svg>
-                </button>
-                <button
-                  class="expertise-arrow"
-                  type="button"
-                  data-carousel-next
-                  aria-label="Next expertise"
-                >
-                  <svg aria-hidden="true" viewBox="0 0 24 24">
-                    <path d="m9 18 6-6-6-6"></path>
-                  </svg>
-                </button>
-              </div>
-            </div>
+            <ul class="ecosystem-grid">
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M17.5 19H7a5 5 0 1 1 1-9.9A7 7 0 0 1 21 12.5 4.5 4.5 0 0 1 17.5 19Z"></path></svg>Analog Layout</li>
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"></circle><circle cx="12" cy="12" r="8"></circle><path d="M12 2v3M12 19v3M2 12h3M19 12h3"></path></svg>Mixed-Signal Layout</li>
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M3 21V9l6 4V9l6 4V3h6v18zM7 17h.01M12 17h.01M17 17h.01"></path></svg>Digital PD (ASIC, SoC, FPGA)</li>
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"></rect><path d="M10 5h4M11 18h2"></path></svg>Semi-Custom Design</li>
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><rect x="4" y="7" width="16" height="13" rx="3"></rect><path d="M9 12h.01M15 12h.01M9 16h6M12 7V3M10 3h4"></path></svg>DFT</li>
+              <li class="ecosystem-item"><svg aria-hidden="true" viewBox="0 0 24 24"><path d="M4 19V5M4 12h5l3-5 4 10 2-5h2"></path></svg>Timing &amp; Signoff</li>
+            </ul>
           </section>
         </div>
       </section>
 
       <section class="section why-section">
-        <div class="container company-grid">
-          <div>
+        <div class="container why-layout">
+          <div class="why-heading">
             <p class="eyebrow">Why V-Chip?</p>
             <h2>A partner for<br>your next chapter.</h2>
-            <ul class="why-points">
+          </div>
+          <ul class="why-points">
               <li>
                 <span aria-hidden="true">01</span>
                 <div>
@@ -490,9 +384,7 @@
                   </p>
                 </div>
               </li>
-            </ul>
-          </div>
-          <div class="ecosystem-slot"></div>
+          </ul>
         </div>
       </section>
 
