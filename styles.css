@@ -3303,6 +3303,32 @@ h3 {
 .floating-top[hidden] {
   display: none;
 }
+/* Standalone fixed layer (sibling of .floating-actions, not nested inside
+   it) so mix-blend-mode composites against the real page behind it rather
+   than being isolated inside .floating-actions' own stacking context. */
+.floating-contact-label {
+  position: fixed;
+  right: 90px;
+  bottom: 50px;
+  transform: translateY(50%);
+  z-index: 90;
+  width: 11ch;
+  text-align: left;
+  color: #fff;
+  mix-blend-mode: difference;
+  font-weight: 800;
+  font-size: 0.9375rem;
+  letter-spacing: 0.01em;
+  pointer-events: none;
+}
+.floating-contact-label-text {
+  display: inline-block;
+  overflow: hidden;
+  white-space: nowrap;
+  vertical-align: top;
+  width: 0;
+  border-right: 2px solid #fff;
+}
 @media (max-width: 480px) {
   .floating-actions {
     right: 16px;
@@ -3317,9 +3343,46 @@ h3 {
     width: 19px;
     height: 19px;
   }
+  .floating-contact-label {
+    right: 72px;
+    bottom: 39px;
+    font-size: 0.875rem;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .floating-action {
     transition: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .floating-contact-label-text {
+    animation:
+      floating-typewriter 5s steps(10, end) infinite,
+      floating-cursor-blink 0.8s step-end infinite;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .floating-contact-label-text {
+    width: 11ch;
+    border-right-color: transparent;
+  }
+}
+@keyframes floating-typewriter {
+  0% {
+    width: 0;
+  }
+  35% {
+    width: 11ch;
+  }
+  65% {
+    width: 11ch;
+  }
+  100% {
+    width: 0;
+  }
+}
+@keyframes floating-cursor-blink {
+  50% {
+    border-color: transparent;
   }
 }
