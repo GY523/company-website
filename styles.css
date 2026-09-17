@@ -1933,12 +1933,15 @@ h3 {
   animation-play-state: paused;
 }
 .trust-list li {
-  color: #4a5872;
-  font-size: 1.5rem;
-  font-weight: 800;
-  letter-spacing: -0.01em;
-  text-align: center;
-  white-space: nowrap;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.trust-list img {
+  height: 44px;
+  width: auto;
+  max-width: 160px;
+  object-fit: contain;
 }
 @keyframes trust-scroll {
   to {
@@ -2583,8 +2586,9 @@ h3 {
   .trust-list {
     gap: 38px;
   }
-  .trust-list li {
-    font-size: 1.1875rem;
+  .trust-list img {
+    height: 34px;
+    max-width: 120px;
   }
   .welcome-copy {
     grid-template-columns: minmax(0, 1fr);
