@@ -879,14 +879,36 @@ main:focus {
 }
 .contact-panel {
   padding: 40px;
-  background: var(--surface);
-  border-top: 3px solid var(--blue);
+  background: var(--navy-dark);
+  border-top: 3px solid var(--red);
+  border-radius: 0 0 14px 14px;
+}
+.contact-panel .eyebrow {
+  color: #f4767e;
 }
 .contact-panel h2 {
+  color: #fff;
   font-size: 2rem;
 }
 .contact-panel .button {
   margin-top: 6px;
+}
+.contact-panel .form-field label {
+  color: #9fb0c8;
+}
+.contact-panel .form-consent {
+  color: #c2d2e2;
+}
+.contact-panel .fine-print {
+  color: #9fb0c8;
+}
+.contact-panel .fine-print a {
+  color: #9dccfa;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.contact-panel .fine-print a:hover {
+  color: #fff;
 }
 .contact-form {
   display: flex;
@@ -3082,6 +3104,11 @@ h3 {
   background: var(--navy-dark) url("assets/images/about.png") center bottom /
     cover no-repeat;
 }
+.page-hero-video--careers {
+  background: var(--navy-dark)
+    url("assets/images/careers-background.jpeg") center bottom / cover
+    no-repeat;
+}
 .hero-video-media {
   position: absolute;
   inset: 0;
@@ -3266,6 +3293,12 @@ h3 {
     background:
       linear-gradient(90deg, #050e1fb8 0%, #0714263d 100%),
       var(--navy) url("assets/images/about.png") center bottom / cover no-repeat;
+  }
+  .page-hero-video--careers {
+    background:
+      linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
+      var(--navy) url("assets/images/careers-background.jpeg") center bottom /
+        cover no-repeat;
   }
   .page-hero-video::before {
     background: none;

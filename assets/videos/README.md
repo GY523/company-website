@@ -1,23 +1,28 @@
 # Hero background video
 
-The Careers page is wired up to play a looping background video behind
-the page hero (`.page-hero-video` in `styles.css`). The About page
-used to as well, but now uses a static image (`assets/images/about.png`)
-instead.
+Neither the About nor Careers page currently uses a background video
+-- both use a static image instead (`assets/images/about.png` and
+`assets/images/careers-background.jpeg`). `.page-hero-video` in
+`styles.css` still supports a `<video class="hero-video-media">`
+background if a page wants one again.
 
-- `careers-hero.mp4` — used on `careers.html`. **In place** (a
-  CPU/circuit animation, compressed from 25.7MB to ~5MB — see below;
-  originally used on the About page before it moved here). Poster
-  frame: `assets/images/careers-hero-poster.jpg`, extracted straight
-  from the video so there's no flash of a different image before
-  playback starts.
+- `careers-hero.mp4` — **currently unused.** Sitting here in case it's
+  wanted again (a CPU/circuit animation, compressed from 25.7MB to
+  ~5MB — see below; it's moved between the About and Careers pages a
+  couple of times already). Poster frame:
+  `assets/images/careers-hero-poster.jpg`, extracted straight from the
+  video so there's no flash of a different image before playback
+  starts.
 
-The video element also gets `filter: brightness(0.4) saturate(1.05)`
-plus a dark gradient scrim (both in `styles.css`, under
-`.hero-video-media` / `.page-hero-video::before`) so bright or busy
-footage never fights the heading text for contrast. Keep that in mind
-if you swap in new footage — brighter source video is fine, the filter
-absorbs it.
+To wire a video back in on a page, add the `<video>` markup (see the
+`about.html`/`careers.html` git history for the exact pattern) and
+give the section's `page-hero-video--*` modifier class a
+`.hero-video-media` filter instead of a background-image. The video
+element gets `filter: brightness(0.4) saturate(1.05)` plus a dark
+gradient scrim (both in `styles.css`, under `.hero-video-media` /
+`.page-hero-video::before`) so bright or busy footage never fights the
+heading text for contrast. Keep that in mind if you swap in new
+footage — brighter source video is fine, the filter absorbs it.
 
 ## Recommended specs
 
@@ -28,7 +33,7 @@ absorbs it.
   muted)
 - File size: keep it under ~6-8MB so the hero loads quickly. Trim/compress
   with `ffmpeg`, e.g.:
-  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart careers-hero.mp4`
+  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart hero.mp4`
 - Content ideas: clean room / fab floor, chip wafer close-ups, PCB or die
   macro shots, engineers at workstations — anything that reads as
   "silicon engineering" without distracting from the text on top
