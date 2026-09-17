@@ -3074,6 +3074,10 @@ h3 {
   background: var(--navy-dark);
   border-bottom: none;
 }
+.page-hero-video--about {
+  background: var(--navy-dark) url("assets/images/about.png") center bottom /
+    cover no-repeat;
+}
 .hero-video-media {
   position: absolute;
   inset: 0;
@@ -3091,6 +3095,14 @@ h3 {
   background:
     linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
     linear-gradient(100deg, #060a18f2 0%, #0e1126e6 32%, #171a36b8 62%, #0e1126cc 100%);
+}
+.page-hero-video--about::before {
+  background: linear-gradient(
+    90deg,
+    #050e1fb8 0%,
+    #07142670 55%,
+    #0714261f 100%
+  );
 }
 .page-hero-video::after {
   content: "";
@@ -3248,9 +3260,8 @@ h3 {
   }
   .page-hero-video--about {
     background:
-      linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
-      var(--navy) url("assets/images/about-hero-poster.jpg") center 45% /
-        cover no-repeat;
+      linear-gradient(90deg, #050e1fb8 0%, #0714263d 100%),
+      var(--navy) url("assets/images/about.png") center bottom / cover no-repeat;
   }
   .page-hero-video::before {
     background: none;
