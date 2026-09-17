@@ -1,0 +1,32 @@
+From 7ce090d08350cddb6f8cdae9158b14b5f8d5a54f Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 05:44:42 +0000
+Subject: [PATCH] Move Intel and Altera to the front of the trust strip
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ index.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/index.html b/index.html
+index 8a62f31..3edef21 100644
+--- a/index.html
++++ b/index.html
+@@ -270,11 +270,11 @@
+           <div class="trust-viewport">
+             <div class="trust-track">
+               <ul class="trust-list">
++                <li><img src="assets/images/trust-logos/intel.svg" alt="Intel" loading="lazy"></li>
++                <li><img src="assets/images/trust-logos/altera.svg" alt="Altera" loading="lazy"></li>
+                 <li><img src="assets/images/trust-logos/tsmc.svg" alt="TSMC" loading="lazy"></li>
+                 <li><img src="assets/images/trust-logos/amd.svg" alt="AMD" loading="lazy"></li>
+                 <li><img src="assets/images/trust-logos/mediatek.svg" alt="MediaTek" loading="lazy"></li>
+-                <li><img src="assets/images/trust-logos/altera.svg" alt="Altera" loading="lazy"></li>
+-                <li><img src="assets/images/trust-logos/intel.svg" alt="Intel" loading="lazy"></li>
+                 <li><img src="assets/images/trust-logos/efinix.png" alt="Efinix" loading="lazy"></li>
+                 <li><img src="assets/images/trust-logos/akrostar.jpg" alt="AkroStar" loading="lazy"></li>
+               </ul>
+-- 
+2.43.0
+

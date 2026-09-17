@@ -1,0 +1,43 @@
+From e6b98a3da72a5e956421ffa1a247837f7ceab2f9 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 06:15:20 +0000
+Subject: [PATCH] Lighten the Careers hero scrim so the background image
+ actually shows
+
+The Careers hero was inheriting the default .page-hero-video::before
+scrim, which was tuned for a busier video source and pushes to ~100%
+opacity by the bottom of the section -- against the new (already
+fairly dark) careers-background.jpeg, that crushed nearly all of the
+image to black. Gave it its own lighter, left-to-right gradient scrim
+(same technique as the About page's override), so the chip/circuit
+board photo is now clearly visible on the right while the heading
+text on the left stays fully readable.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ styles.css | 8 ++++++++
+ 1 file changed, 8 insertions(+)
+
+diff --git a/styles.css b/styles.css
+index 2055e6c..b9b1260 100644
+--- a/styles.css
++++ b/styles.css
+@@ -3135,6 +3135,14 @@ h3 {
+     #0714261f 100%
+   );
+ }
++.page-hero-video--careers::before {
++  background: linear-gradient(
++    90deg,
++    #050e1fc4 0%,
++    #07142680 45%,
++    #07142633 100%
++  );
++}
+ .page-hero-video::after {
+   content: "";
+   position: absolute;
+-- 
+2.43.0
+

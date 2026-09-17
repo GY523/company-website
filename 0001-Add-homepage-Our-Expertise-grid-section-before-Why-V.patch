@@ -1,0 +1,232 @@
+From eb451dc17f594762d1ed152db078ab6266582f1d Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 07:42:43 +0000
+Subject: [PATCH] Add homepage "Our Expertise" grid section before Why V-Chip
+
+New dark 3x2 card grid (inspired by a reference site, copy rewritten
+in V-Chip's own voice rather than copied) covering six of V-Chip's
+service pages: Architecture Planning, IP Selection & Integration,
+Design Verification, Custom Analog Design, Physical Design, and
+full-turnkey Chip Design. Each card links through to its matching
+service page. Placed between the "Capabilities under one roof" panel
+and the "Why V-Chip?" section per the v2.0 layout.
+
+Icons are plain (no background badge), bold red line icons sized up
+for presence; card headings are bold, body copy stays regular weight.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ index.html | 101 +++++++++++++++++++++++++++++++++++++++++++++++++++++
+ styles.css |  86 +++++++++++++++++++++++++++++++++++++++++++++
+ 2 files changed, 187 insertions(+)
+
+diff --git a/index.html b/index.html
+index 46056a0..9f68ff4 100644
+--- a/index.html
++++ b/index.html
+@@ -347,6 +347,107 @@
+         </div>
+       </section>
+ 
++      <section class="section expertise-showcase">
++        <div class="container">
++          <div class="section-heading centered-heading">
++            <h2>Our Expertise</h2>
++            <p>
++              Specialist capability at every stage of the chip development
++              lifecycle.
++            </p>
++          </div>
++          <div class="expertise-showcase-grid">
++            <a class="expertise-showcase-card" href="architecture-planning.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <path d="m12 2 10 5-10 5L2 7Z"></path>
++                  <path d="m2 17 10 5 10-5"></path>
++                  <path d="m2 12 10 5 10-5"></path>
++                </svg>
++              </span>
++              <h3>Architecture &amp; System Planning</h3>
++              <p>
++                Define performance targets, power budgets, and IP strategy
++                before implementation begins, so every later decision has a
++                foundation.
++              </p>
++            </a>
++            <a class="expertise-showcase-card" href="ip-selection.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
++                  <path d="M15 7h2a5 5 0 1 1 0 10h-2"></path>
++                  <line x1="8" x2="16" y1="12" y2="12"></line>
++                </svg>
++              </span>
++              <h3>IP Selection &amp; Integration</h3>
++              <p>
++                Qualify processor, interface, and memory IP against your
++                requirements, then plan integration and vendor coordination.
++              </p>
++            </a>
++            <a class="expertise-showcase-card" href="design-verification.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <path
++                    d="M20 13c0 5-3.5 7.5-7.5 8.5-.3.1-.7.1-1 0C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.79 17 5 19 5a1 1 0 0 1 1 1Z"
++                  ></path>
++                  <path d="m9 12 2 2 4-4"></path>
++                </svg>
++              </span>
++              <h3>Design Verification</h3>
++              <p>
++                Catch functional issues before silicon with simulation,
++                formal methods, coverage analysis, and emulation.
++              </p>
++            </a>
++            <a class="expertise-showcase-card" href="analog-design.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
++                </svg>
++              </span>
++              <h3>Custom Analog &amp; Mixed-Signal Design</h3>
++              <p>
++                Transistor-level analog and mixed-signal circuits, balanced
++                for performance, power, and area on your target process.
++              </p>
++            </a>
++            <a class="expertise-showcase-card" href="physical-design.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <rect width="7" height="7" x="3" y="3" rx="1"></rect>
++                  <rect width="7" height="7" x="14" y="3" rx="1"></rect>
++                  <rect width="7" height="7" x="14" y="14" rx="1"></rect>
++                  <rect width="7" height="7" x="3" y="14" rx="1"></rect>
++                </svg>
++              </span>
++              <h3>Physical Design &amp; Implementation</h3>
++              <p>
++                Floorplan, place-and-route, and timing closure that turn a
++                verified netlist into sign-off-ready silicon.
++              </p>
++            </a>
++            <a class="expertise-showcase-card" href="chip-design.html">
++              <span class="expertise-showcase-icon" aria-hidden="true">
++                <svg viewBox="0 0 24 24">
++                  <rect width="16" height="16" x="4" y="4" rx="2"></rect>
++                  <rect width="6" height="6" x="9" y="9" rx="1"></rect>
++                  <path
++                    d="M15 2v2M9 2v2M15 20v2M9 20v2M20 15h2M20 9h2M2 15h2M2 9h2"
++                  ></path>
++                </svg>
++              </span>
++              <h3>Full Turnkey Chip Design</h3>
++              <p>
++                Architecture, IP, verification, analog, and physical design
++                under a single engineering engagement, start to finish.
++              </p>
++            </a>
++          </div>
++        </div>
++      </section>
++
+       <section class="section why-section">
+         <div class="container why-layout">
+           <div class="why-heading">
+diff --git a/styles.css b/styles.css
+index 92b8739..c2c1a3a 100644
+--- a/styles.css
++++ b/styles.css
+@@ -3148,3 +3148,89 @@ h3 {
+ .section-band-blue .career-note a {
+   color: #fff;
+ }
++
++/* Homepage "Our Expertise" showcase grid */
++.expertise-showcase {
++  position: relative;
++  isolation: isolate;
++  overflow: hidden;
++  background: #0d0d10;
++}
++.expertise-showcase::before {
++  content: "";
++  position: absolute;
++  inset: 0;
++  z-index: 0;
++  background-image: radial-gradient(circle, #ffffff14 1px, transparent 1px);
++  background-size: 28px 28px;
++}
++.expertise-showcase > .container {
++  position: relative;
++  z-index: 1;
++}
++.expertise-showcase .centered-heading h2 {
++  color: #fff;
++}
++.expertise-showcase .centered-heading p {
++  color: #9a9aa5;
++}
++.expertise-showcase-grid {
++  display: grid;
++  grid-template-columns: repeat(3, 1fr);
++  gap: 24px;
++  margin-top: 48px;
++}
++.expertise-showcase-card {
++  display: block;
++  padding: 32px 28px;
++  border-radius: 14px;
++  background: #17171c;
++  border: 1px solid #2a2a32;
++  transition:
++    border-color var(--motion-smooth),
++    background-color var(--motion-smooth),
++    transform var(--motion-smooth);
++}
++.expertise-showcase-card:hover {
++  border-color: #3a4a63;
++  background: #1c1c22;
++  transform: translateY(-4px);
++}
++.expertise-showcase-icon {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  margin-bottom: 20px;
++  color: var(--red);
++}
++.expertise-showcase-icon svg {
++  width: 40px;
++  height: 40px;
++  fill: none;
++  stroke: currentColor;
++  stroke-width: 2.2;
++  stroke-linecap: round;
++  stroke-linejoin: round;
++}
++.expertise-showcase-card h3 {
++  color: #fff;
++  font-size: 1.3125rem;
++  font-weight: 700;
++  max-width: none;
++  margin-bottom: 12px;
++}
++.expertise-showcase-card p {
++  color: #9a9aa5;
++  font-size: 0.9375rem;
++  line-height: 1.6;
++}
++@media (max-width: 900px) {
++  .expertise-showcase-grid {
++    grid-template-columns: repeat(2, 1fr);
++  }
++}
++@media (max-width: 560px) {
++  .expertise-showcase-grid {
++    grid-template-columns: 1fr;
++  }
++}
+-- 
+2.43.0
+

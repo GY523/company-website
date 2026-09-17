@@ -1,0 +1,132 @@
+From b0b9ee4c65357a75d3940314404343df2bef09dd Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 08:59:44 +0000
+Subject: [PATCH 2/3] Drop capability-label emoji, add Contact hero background,
+ rename careers bg to .jpg
+
+Remove the heart/star emoji accents from the "V-Chip at a glance" panel
+labels. Wire the Contact Us hero to a page-hero-video--contact background
+(assets/images/contactus.jpeg, to be added) matching the About/Careers
+pattern, and rename careers-background.jpeg to careers-background.jpg.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ ...background.jpeg => careers-background.jpg} | Bin
+ contact.html                                  |   2 +-
+ index.html                                    |   8 ++---
+ styles.css                                    |  29 ++++++++++++------
+ 4 files changed, 23 insertions(+), 16 deletions(-)
+ rename assets/images/{careers-background.jpeg => careers-background.jpg} (100%)
+
+diff --git a/assets/images/careers-background.jpeg b/assets/images/careers-background.jpg
+similarity index 100%
+rename from assets/images/careers-background.jpeg
+rename to assets/images/careers-background.jpg
+diff --git a/contact.html b/contact.html
+index 8dcc67b..60ad2e7 100644
+--- a/contact.html
++++ b/contact.html
+@@ -114,7 +114,7 @@
+       </div>
+     </header>
+     <main id="main" tabindex="-1">
+-      <section class="page-hero">
++      <section class="page-hero page-hero-video page-hero-video--contact">
+         <div class="container">
+           <nav class="breadcrumb" aria-label="Breadcrumb">
+             <ol>
+diff --git a/index.html b/index.html
+index a0720e3..479c7b1 100644
+--- a/index.html
++++ b/index.html
+@@ -224,9 +224,7 @@
+           </div>
+           <section class="stats-panel" aria-labelledby="stats-title">
+             <div class="stats-cell stats-cell--fields">
+-              <p class="capability-label">
+-                <span aria-hidden="true">❤️</span> Application fields
+-              </p>
++              <p class="capability-label">Application fields</p>
+               <ul class="field-list">
+                 <li>
+                   <svg aria-hidden="true" viewBox="0 0 24 24">
+@@ -290,9 +288,7 @@
+               <h2 id="stats-title">Specialist depth. Connected delivery.</h2>
+             </div>
+             <div class="stats-cell stats-cell--nodes">
+-              <p class="capability-label">
+-                <span aria-hidden="true">⭐</span> Process nodes
+-              </p>
++              <p class="capability-label">Process nodes</p>
+               <ul class="node-badges">
+                 <li>2nm</li>
+                 <li>12nm</li>
+diff --git a/styles.css b/styles.css
+index 003d8b8..6794cad 100644
+--- a/styles.css
++++ b/styles.css
+@@ -2022,13 +2022,6 @@ h3 {
+   letter-spacing: 0.14em;
+   text-transform: uppercase;
+ }
+-.capability-label span {
+-  display: inline-block;
+-  margin-right: 2px;
+-  font-size: 0.9375rem;
+-  letter-spacing: normal;
+-  vertical-align: -2px;
+-}
+ .node-badges {
+   display: grid;
+   grid-template-columns: repeat(2, minmax(0, 1fr));
+@@ -3142,9 +3135,13 @@ h3 {
+ }
+ .page-hero-video--careers {
+   background: var(--navy-dark)
+-    url("assets/images/careers-background.jpeg") center bottom / cover
++    url("assets/images/careers-background.jpg") center bottom / cover
+     no-repeat;
+ }
++.page-hero-video--contact {
++  background: var(--navy-dark) url("assets/images/contactus.jpeg") center
++    bottom / cover no-repeat;
++}
+ .hero-video-media {
+   position: absolute;
+   inset: 0;
+@@ -3179,6 +3176,14 @@ h3 {
+     #07142633 100%
+   );
+ }
++.page-hero-video--contact::before {
++  background: linear-gradient(
++    90deg,
++    #050e1fc4 0%,
++    #07142680 45%,
++    #07142633 100%
++  );
++}
+ .page-hero-video::after {
+   content: "";
+   position: absolute;
+@@ -3368,9 +3373,15 @@ h3 {
+   .page-hero-video--careers {
+     background:
+       linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
+-      var(--navy) url("assets/images/careers-background.jpeg") center bottom /
++      var(--navy) url("assets/images/careers-background.jpg") center bottom /
+         cover no-repeat;
+   }
++  .page-hero-video--contact {
++    background:
++      linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
++      var(--navy) url("assets/images/contactus.jpeg") center bottom / cover
++        no-repeat;
++  }
+   .page-hero-video::before {
+     background: none;
+   }
+-- 
+2.43.0
+

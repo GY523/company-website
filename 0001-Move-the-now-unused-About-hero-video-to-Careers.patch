@@ -1,0 +1,91 @@
+From 35f84d0c111ab85c2edf659e4ebcdd8c8267910d Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 05:58:00 +0000
+Subject: [PATCH] Move the (now-unused) About hero video to Careers
+
+The About page hero switched to a static image a while back, leaving
+about-hero.mp4 sitting unused in the repo. Careers' hero video slot
+had been wired up in the markup since earlier this session but never
+actually had a file behind it (careers-hero.mp4 was never added), so
+it's been silently falling back to a static poster this whole time.
+
+Renamed about-hero.mp4 -> careers-hero.mp4 (and its poster frame to
+match) and pointed careers.html's <video> at the new filename.
+
+Note: I can't visually confirm autoplay in my own test browser here --
+this sandbox's headless Chromium has no H.264 decoder at all
+(canPlayType returns empty for H.264, "probably" for WebM only), so
+every MP4 <video> fails to decode in my testing regardless of server
+or markup. The file itself is a valid H.264/MP4 (verified with
+ffprobe) and the wiring is identical to the pattern that worked for
+About's video before, so it should autoplay fine in any real browser
+-- just something to double check once this is live.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ ...ero-poster.jpg => careers-hero-poster.jpg} | Bin
+ assets/videos/README.md                       |  23 +++++++++---------
+ .../{about-hero.mp4 => careers-hero.mp4}      | Bin
+ careers.html                                  |   2 +-
+ 4 files changed, 12 insertions(+), 13 deletions(-)
+ rename assets/images/{about-hero-poster.jpg => careers-hero-poster.jpg} (100%)
+ rename assets/videos/{about-hero.mp4 => careers-hero.mp4} (100%)
+
+diff --git a/assets/images/about-hero-poster.jpg b/assets/images/careers-hero-poster.jpg
+similarity index 100%
+rename from assets/images/about-hero-poster.jpg
+rename to assets/images/careers-hero-poster.jpg
+diff --git a/assets/videos/README.md b/assets/videos/README.md
+index bfbf309..98341cb 100644
+--- a/assets/videos/README.md
++++ b/assets/videos/README.md
+@@ -1,17 +1,16 @@
+-# Hero background videos
++# Hero background video
+ 
+-The About and Careers pages are wired up to play a looping background
+-video behind the page hero (`.page-hero-video` in `styles.css`).
++The Careers page is wired up to play a looping background video behind
++the page hero (`.page-hero-video` in `styles.css`). The About page
++used to as well, but now uses a static image (`assets/images/about.png`)
++instead.
+ 
+-- `about-hero.mp4` — used on `about.html`. **In place** (a CPU/circuit
+-  animation, compressed from 25.7MB to ~5MB — see below). Poster frame:
+-  `assets/images/about-hero-poster.jpg`, extracted straight from the
+-  video so there's no flash of a different image before playback starts.
+-- `careers-hero.mp4` — used on `careers.html`. **Not added yet** — until
+-  this file exists, visitors just see the poster image
+-  (`assets/images/home-background.jpg`), so the page still looks
+-  complete. Drop a clip in with this exact filename and it'll start
+-  playing automatically, no code changes needed.
++- `careers-hero.mp4` — used on `careers.html`. **In place** (a
++  CPU/circuit animation, compressed from 25.7MB to ~5MB — see below;
++  originally used on the About page before it moved here). Poster
++  frame: `assets/images/careers-hero-poster.jpg`, extracted straight
++  from the video so there's no flash of a different image before
++  playback starts.
+ 
+ The video element also gets `filter: brightness(0.4) saturate(1.05)`
+ plus a dark gradient scrim (both in `styles.css`, under
+diff --git a/assets/videos/about-hero.mp4 b/assets/videos/careers-hero.mp4
+similarity index 100%
+rename from assets/videos/about-hero.mp4
+rename to assets/videos/careers-hero.mp4
+diff --git a/careers.html b/careers.html
+index 6b46eb5..5b6b079 100644
+--- a/careers.html
++++ b/careers.html
+@@ -117,7 +117,7 @@
+       <section class="page-hero page-hero-video">
+         <video
+           class="hero-video-media"
+-          poster="assets/images/home-background.jpg"
++          poster="assets/images/careers-hero-poster.jpg"
+           autoplay
+           muted
+           loop
+-- 
+2.43.0
+

@@ -1,0 +1,142 @@
+From 1d965679ec23f0aa2534a0bd702e0c41a74aa9e3 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 18:59:59 +0000
+Subject: [PATCH] Fix careers.html merge conflict, ease header spacing, extend
+ navy band
+
+- Resolved an unresolved git conflict marker that had been committed
+  straight into the Careers hero (a leftover <<<<<<< HEAD / ======= /
+  >>>>>>> block around the location badge, visible live on the page).
+  Dropped that badge entirely, matching how the About page hero
+  handles its own location badge.
+- Header now has 32px of breathing room instead of sitting flush at
+  the viewport edge (20px on narrow mobile) -- the earlier full-bleed
+  change was too tight.
+- "Find your specialty" now uses the same dark navy band as About's
+  "How we work" (.section-band-navy), so the two blue-band sections
+  read consistently across pages.
+- Removed "Penang" from Careers marketing copy (meta description,
+  hero lede, hero badge) and softened each job listing's location
+  from "Penang, Malaysia" to "Malaysia", consistent with the earlier
+  direction to stop foregrounding one location. Left the literal
+  office address in the footer untouched.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ careers.html | 25 ++++++-------------------
+ styles.css   |  6 +++++-
+ 2 files changed, 11 insertions(+), 20 deletions(-)
+
+diff --git a/careers.html b/careers.html
+index e46c06d..7719b02 100644
+--- a/careers.html
++++ b/careers.html
+@@ -6,7 +6,7 @@
+     <title>Careers at V-Chip</title>
+     <meta
+       name="description"
+-      content="Explore IC design engineering roles at V-Chip in Penang, Malaysia. Apply by email across analog, digital, verification, physical design, SoC, and DFT."
++      content="Explore IC design engineering roles at V-Chip. Apply by email across analog, digital, verification, physical design, SoC, and DFT."
+    >
+     <meta name="theme-color" content="#102d50">
+     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+@@ -135,7 +135,7 @@
+           <p class="eyebrow">Join V-Chip</p>
+           <h1>Careers at V-Chip</h1>
+           <p class="lede">
+-            Real chips, real ownership. Build your career on our Penang
++            Real chips, real ownership. Build your career on our
+             design team.
+           </p>
+           <div class="hero-badge-row">
+@@ -145,19 +145,6 @@
+               </svg>
+               3 open specialties
+             </span>
+-            <span class="hero-badge">
+-              <svg aria-hidden="true" viewBox="0 0 24 24">
+-                <path
+-                  d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+-                ></path>
+-                <circle cx="12" cy="10" r="2.5"></circle>
+-              </svg>
+-<<<<<<< HEAD
+-              Penang, Malaysia
+-=======
+-              Gelugor, Penang
+->>>>>>> f2e2599 (Bigger hero text, 3-col careers grid, real address)
+-            </span>
+             <span class="hero-badge">
+               <svg aria-hidden="true" viewBox="0 0 24 24">
+                 <path
+@@ -193,7 +180,7 @@
+           </div>
+         </div>
+       </section>
+-      <section class="section section-band-blue">
++      <section class="section section-band-blue section-band-navy">
+         <div class="container">
+           <div class="section-heading">
+             <div>
+@@ -223,7 +210,7 @@
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+-                  >Penang, Malaysia</span
++                  >Malaysia</span
+                 ><span class="career-action"
+                   >Apply by email
+                   <svg
+@@ -250,7 +237,7 @@
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+-                  >Penang, Malaysia</span
++                  >Malaysia</span
+                 ><span class="career-action"
+                   >Apply by email
+                   <svg
+@@ -277,7 +264,7 @@
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+-                  >Penang, Malaysia</span
++                  >Malaysia</span
+                 ><span class="career-action"
+                   >Apply by email
+                   <svg
+diff --git a/styles.css b/styles.css
+index 8ac51cf..bcf8c9e 100644
+--- a/styles.css
++++ b/styles.css
+@@ -259,6 +259,7 @@ main:focus {
+   width: 100%;
+   max-width: none;
+   margin-inline: 0;
++  padding-inline: 32px;
+ }
+ .header-inner {
+   display: flex;
+@@ -1330,6 +1331,9 @@ main:focus {
+   .container {
+     width: calc(100% - 40px);
+   }
++  .site-header .container {
++    padding-inline: 20px;
++  }
+   .header-inner {
+     min-height: 72px;
+   }
+@@ -3138,7 +3142,7 @@ h3 {
+ .section-band-blue .career-note a {
+   color: #fff;
+ }
+-/* About "How we work" override: match the About hero's dark navy instead of blue. */
++/* Dark navy override for blue section bands (About "How we work", Careers "Find your specialty"). */
+ .section-band-navy {
+   background: var(--navy-dark);
+   --motion-reveal: 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+-- 
+2.43.0
+

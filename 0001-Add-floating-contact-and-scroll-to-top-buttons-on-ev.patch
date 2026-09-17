@@ -1,0 +1,561 @@
+From eefe6bfdcd9ca9d0db800299f39dc4ec9ada8195 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 08:16:48 +0000
+Subject: [PATCH] Add floating contact and scroll-to-top buttons on every page
+
+Fixed bottom-right stack of two small round buttons, present on all
+12 pages: a red envelope icon linking to contact.html, and a navy
+up-arrow that appears once the page has been scrolled 400px and
+smooth-scrolls back to top on click (instant for
+prefers-reduced-motion). Same site.js file handles it everywhere
+since every page already loads it.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ about.html                  | 25 +++++++++++++
+ analog-design.html          | 25 +++++++++++++
+ architecture-planning.html  | 25 +++++++++++++
+ careers.html                | 25 +++++++++++++
+ chip-design.html            | 25 +++++++++++++
+ contact.html                | 25 +++++++++++++
+ design-verification.html    | 25 +++++++++++++
+ index.html                  | 25 +++++++++++++
+ ip-product-development.html | 25 +++++++++++++
+ ip-selection.html           | 25 +++++++++++++
+ news.html                   | 25 +++++++++++++
+ physical-design.html        | 25 +++++++++++++
+ site.js                     | 17 +++++++++
+ styles.css                  | 71 +++++++++++++++++++++++++++++++++++++
+ 14 files changed, 388 insertions(+)
+
+diff --git a/about.html b/about.html
+index bd41d45..93f8831 100644
+--- a/about.html
++++ b/about.html
+@@ -431,5 +431,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/analog-design.html b/analog-design.html
+index d85b9ec..1f7952d 100644
+--- a/analog-design.html
++++ b/analog-design.html
+@@ -313,5 +313,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/architecture-planning.html b/architecture-planning.html
+index e362d33..3865128 100644
+--- a/architecture-planning.html
++++ b/architecture-planning.html
+@@ -310,5 +310,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/careers.html b/careers.html
+index ae0fc62..43d55f4 100644
+--- a/careers.html
++++ b/careers.html
+@@ -385,5 +385,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/chip-design.html b/chip-design.html
+index e697576..f0880f4 100644
+--- a/chip-design.html
++++ b/chip-design.html
+@@ -312,5 +312,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/contact.html b/contact.html
+index adc579a..6133594 100644
+--- a/contact.html
++++ b/contact.html
+@@ -299,5 +299,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/design-verification.html b/design-verification.html
+index e78ab0e..8dbaf25 100644
+--- a/design-verification.html
++++ b/design-verification.html
+@@ -310,5 +310,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/index.html b/index.html
+index c0fe802..4d66a6b 100644
+--- a/index.html
++++ b/index.html
+@@ -582,5 +582,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/ip-product-development.html b/ip-product-development.html
+index 280c66f..c6826ce 100644
+--- a/ip-product-development.html
++++ b/ip-product-development.html
+@@ -313,5 +313,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/ip-selection.html b/ip-selection.html
+index add3de0..4705af4 100644
+--- a/ip-selection.html
++++ b/ip-selection.html
+@@ -310,5 +310,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/news.html b/news.html
+index 809d2ce..cfc9c06 100644
+--- a/news.html
++++ b/news.html
+@@ -262,5 +262,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/physical-design.html b/physical-design.html
+index 4060200..565afa4 100644
+--- a/physical-design.html
++++ b/physical-design.html
+@@ -311,5 +311,30 @@
+         </div>
+       </div>
+     </footer>
++    <div class="floating-actions">
++      <a
++        class="floating-action floating-contact"
++        href="contact.html"
++        aria-label="Contact us"
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path
++            d="M4 4h16a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1Z"
++          ></path>
++          <path d="m3 7 9 6 9-6"></path>
++        </svg>
++      </a>
++      <button
++        class="floating-action floating-top"
++        type="button"
++        data-scroll-top
++        aria-label="Scroll to top"
++        hidden
++      >
++        <svg aria-hidden="true" viewBox="0 0 24 24">
++          <path d="M12 19V5M5 12l7-7 7 7"></path>
++        </svg>
++      </button>
++    </div>
+   </body>
+ </html>
+diff --git a/site.js b/site.js
+index e456644..e8420bf 100644
+--- a/site.js
++++ b/site.js
+@@ -53,6 +53,23 @@
+     });
+   }
+ 
++  const scrollTopButton = document.querySelector("[data-scroll-top]");
++  if (scrollTopButton) {
++    const toggleScrollTop = () => {
++      scrollTopButton.hidden = window.scrollY < 400;
++    };
++    window.addEventListener("scroll", toggleScrollTop, { passive: true });
++    toggleScrollTop();
++    scrollTopButton.addEventListener("click", () => {
++      window.scrollTo({
++        top: 0,
++        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
++          ? "auto"
++          : "smooth",
++      });
++    });
++  }
++
+   const trustTrack = document.querySelector(".trust-track");
+   const trustList = trustTrack?.querySelector(".trust-list");
+   if (trustTrack && trustList) {
+diff --git a/styles.css b/styles.css
+index 0a6eff8..e9417fc 100644
+--- a/styles.css
++++ b/styles.css
+@@ -3252,3 +3252,74 @@ h3 {
+     grid-template-columns: 1fr;
+   }
+ }
++
++/* Floating contact / scroll-to-top actions (all pages) */
++.floating-actions {
++  position: fixed;
++  right: 24px;
++  bottom: 24px;
++  z-index: 90;
++  display: flex;
++  flex-direction: column;
++  align-items: center;
++  gap: 12px;
++}
++.floating-action {
++  display: inline-flex;
++  align-items: center;
++  justify-content: center;
++  width: 52px;
++  height: 52px;
++  border: none;
++  border-radius: 50%;
++  background: var(--red);
++  color: #fff;
++  box-shadow: 0 10px 24px #17203633;
++  transition:
++    background-color var(--motion-fast),
++    transform var(--motion-smooth),
++    box-shadow var(--motion-smooth);
++}
++.floating-action svg {
++  width: 22px;
++  height: 22px;
++  fill: none;
++  stroke: currentColor;
++  stroke-width: 2;
++  stroke-linecap: round;
++  stroke-linejoin: round;
++}
++.floating-action:hover {
++  background: var(--red-hover);
++  transform: translateY(-3px);
++  box-shadow: 0 14px 28px #17203640;
++}
++.floating-top {
++  background: var(--navy);
++}
++.floating-top:hover {
++  background: var(--blue);
++}
++.floating-top[hidden] {
++  display: none;
++}
++@media (max-width: 480px) {
++  .floating-actions {
++    right: 16px;
++    bottom: 16px;
++    gap: 10px;
++  }
++  .floating-action {
++    width: 46px;
++    height: 46px;
++  }
++  .floating-action svg {
++    width: 19px;
++    height: 19px;
++  }
++}
++@media (prefers-reduced-motion: reduce) {
++  .floating-action {
++    transition: none;
++  }
++}
+-- 
+2.43.0
+

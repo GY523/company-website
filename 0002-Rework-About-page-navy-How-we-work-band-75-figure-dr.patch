@@ -1,0 +1,139 @@
+From 2ee674154800129254fb7ecbe3bbd4446f4ed35c Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 18:43:54 +0000
+Subject: [PATCH 2/2] Rework About page: navy "How we work" band, 75+ figure,
+ drop Penang from copy, full-bleed footer
+
+- "How we work" section now uses the same dark navy as the About hero
+  (scoped to this page only via a new .section-band-navy modifier, so
+  Careers' blue "Find your discipline" band is untouched)
+- Hero badge and body copy engineer figure updated from 30+ to 75+ to
+  match the homepage counter
+- Removed "Penang" from marketing/positioning copy (meta description,
+  hero lede, hero badge, intro paragraphs, "Our Penang presence"
+  heading, which is now "Where to find us") per direction from the
+  boss to stop foregrounding one location. Left it in the literal
+  mailing address, map embed, and footer, since that's the real
+  office address rather than positioning language.
+- Footer container is now full-bleed (no left/right gutter), site-wide
+  since the footer markup is shared across all pages
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ about.html | 35 +++++++++++++----------------------
+ styles.css |  9 +++++++++
+ 2 files changed, 22 insertions(+), 22 deletions(-)
+
+diff --git a/about.html b/about.html
+index 539515d..663ad12 100644
+--- a/about.html
++++ b/about.html
+@@ -6,7 +6,7 @@
+     <title>About V-Chip | V-Chip</title>
+     <meta
+       name="description"
+-      content="Meet V-Chip, an IC design and silicon solutions company with a facility in Penang, Malaysia, and turnkey and co-development engagement models."
++      content="Meet V-Chip, an IC design and silicon solutions company offering turnkey and co-development engagement models across the full chip development lifecycle."
+    >
+     <meta name="theme-color" content="#102d50">
+     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+@@ -139,7 +139,7 @@
+           <p class="lede">
+             IC design expertise, connected across the development
+             journey&nbsp;&mdash; from architecture planning to silicon
+-            sign-off, under one Penang roof.
++            sign-off, under one roof.
+           </p>
+           <div class="hero-badge-row">
+             <span class="hero-badge">
+@@ -157,16 +157,7 @@
+                   d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+                 ></path>
+               </svg>
+-              30+ Engineers
+-            </span>
+-            <span class="hero-badge">
+-              <svg aria-hidden="true" viewBox="0 0 24 24">
+-                <path
+-                  d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+-                ></path>
+-                <circle cx="12" cy="10" r="2.5"></circle>
+-              </svg>
+-              Penang, Malaysia
++              75+ Engineers
+             </span>
+           </div>
+           <div class="button-row">
+@@ -199,23 +190,23 @@
+             <p class="eyebrow">Who we are</p>
+             <h2>Specialist by discipline.<br>Connected by design.</h2>
+             <p class="section-copy">
+-              V-Chip is an IC design service company based in Penang, Malaysia, 
+-              providing end-to-end solutions across the semiconductor development lifecycle. 
+-              Our expertise spans architecture planning, IP selection, design verification, 
+-              custom analog design, and physical design, supporting customers from 
++              V-Chip is an IC design service company
++              providing end-to-end solutions across the semiconductor development lifecycle.
++              Our expertise spans architecture planning, IP selection, design verification,
++              custom analog design, and physical design, supporting customers from
+               initial concept through to silicon.
+             </p>
+             <p class="section-copy">
+-              As we continue to expand our Penang team, 
+-              V-Chip is taking on increasingly complex and 
+-              higher-value IC design projects while contributing 
++              As we continue to expand our team,
++              V-Chip is taking on increasingly complex and
++              higher-value IC design projects while contributing
+               to the growth of Malaysia’s semiconductor design ecosystem.
+             </p>
+           </div>
+           <div class="company-facts">
+-            <h2>Our Penang presence</h2>
++            <h2>Where to find us</h2>
+             <p>
+-              Our IC design facility in Penang opened in September 2025,
++              Our IC design facility opened in September 2025,
+               purpose-built to bring architecture, IP, verification, analog,
+               and physical design capability together under one roof.
+             </p>
+@@ -237,7 +228,7 @@
+           </div>
+         </div>
+       </section>
+-      <section class="section section-band-blue">
++      <section class="section section-band-blue section-band-navy">
+         <div class="container">
+           <div class="section-heading">
+             <div>
+diff --git a/styles.css b/styles.css
+index b1f161b..0d9e0b9 100644
+--- a/styles.css
++++ b/styles.css
+@@ -1021,6 +1021,11 @@ main:focus {
+   background: var(--navy-dark);
+   color: #c2d2e2;
+ }
++.site-footer .container {
++  width: 100%;
++  max-width: none;
++  margin-inline: 0;
++}
+ .footer-grid {
+   display: grid;
+   grid-template-columns: 1.4fr 1.4fr 0.75fr 1fr;
+@@ -3106,6 +3111,10 @@ h3 {
+ .section-band-blue .career-note a {
+   color: #fff;
+ }
++/* About "How we work" override: match the About hero's dark navy instead of blue. */
++.section-band-navy {
++  background: var(--navy-dark);
++}
+ 
+ /* Homepage "Our Expertise" showcase grid */
+ .expertise-showcase {
+-- 
+2.43.0
+
