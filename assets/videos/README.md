@@ -1,17 +1,16 @@
-# Hero background videos
+# Hero background video
 
-The About and Careers pages are wired up to play a looping background
-video behind the page hero (`.page-hero-video` in `styles.css`).
+The Careers page is wired up to play a looping background video behind
+the page hero (`.page-hero-video` in `styles.css`). The About page
+used to as well, but now uses a static image (`assets/images/about.png`)
+instead.
 
-- `about-hero.mp4` — used on `about.html`. **In place** (a CPU/circuit
-  animation, compressed from 25.7MB to ~5MB — see below). Poster frame:
-  `assets/images/about-hero-poster.jpg`, extracted straight from the
-  video so there's no flash of a different image before playback starts.
-- `careers-hero.mp4` — used on `careers.html`. **Not added yet** — until
-  this file exists, visitors just see the poster image
-  (`assets/images/home-background.jpg`), so the page still looks
-  complete. Drop a clip in with this exact filename and it'll start
-  playing automatically, no code changes needed.
+- `careers-hero.mp4` — used on `careers.html`. **In place** (a
+  CPU/circuit animation, compressed from 25.7MB to ~5MB — see below;
+  originally used on the About page before it moved here). Poster
+  frame: `assets/images/careers-hero-poster.jpg`, extracted straight
+  from the video so there's no flash of a different image before
+  playback starts.
 
 The video element also gets `filter: brightness(0.4) saturate(1.05)`
 plus a dark gradient scrim (both in `styles.css`, under
