@@ -2012,34 +2012,63 @@ h3 {
   font-size: 0.9375rem;
   line-height: 1.6;
 }
-.stats-grid {
+.capability-block {
   grid-column: 1 / -1;
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 14px;
+  margin-top: 22px;
 }
-.stats-counters {
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 32px;
+.capability-block:first-of-type {
+  margin-top: 24px;
 }
-.stat-counter {
-  min-width: 0;
+.capability-label {
+  color: #9094a8;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.node-badges {
   display: flex;
-  flex-direction: column;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
 }
-.stat-counter-value {
-  color: #72a6ed;
-  font-size: clamp(2.4rem, 4vw, 3.2rem);
-  font-weight: 800;
-  line-height: 1;
-  letter-spacing: -0.03em;
-  font-variant-numeric: tabular-nums;
+.node-badges li {
+  padding: 7px 14px;
+  border: 1px solid #ffffff22;
+  border-radius: 20px;
+  background: #ffffff0d;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
 }
-.stat-counter span {
-  margin-top: 10px;
-  color: #b7b9c7;
-  font-size: 0.9375rem;
-  line-height: 1.4;
+.field-list {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 10px 18px;
+  margin-top: 12px;
+  padding: 0;
+  list-style: none;
+}
+.field-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  color: #d6d8e4;
+  font-size: 0.875rem;
+  font-weight: 600;
+}
+.field-list svg {
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+  fill: none;
+  stroke: #72a6ed;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
 }
 .hero-diagram {
   border-radius: 14px;
@@ -2625,13 +2654,6 @@ h3 {
   .stats-panel {
     grid-template-columns: minmax(0, 1fr);
   }
-  .stats-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .stats-counters {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 24px;
-  }
   .welcome-grid .hero-diagram {
     max-width: 560px;
   }
@@ -2692,6 +2714,9 @@ h3 {
 }
 @media (max-width: 480px) {
   .ecosystem-grid {
+    grid-template-columns: minmax(0, 1fr);
+  }
+  .field-list {
     grid-template-columns: minmax(0, 1fr);
   }
   .header-inner {

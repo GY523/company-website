@@ -58,44 +58,6 @@
     });
   }
 
-  const countMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
-  const counters = document.querySelectorAll("[data-count-to]");
-  if (counters.length) {
-    const animateCounter = (element) => {
-      const target = Number(element.dataset.countTo) || 0;
-      const suffix = element.dataset.suffix || "";
-      if (countMotion.matches) {
-        element.textContent = `${target}${suffix}`;
-        return;
-      }
-      const duration = 1600;
-      const start = performance.now();
-      const tick = (now) => {
-        const progress = Math.min((now - start) / duration, 1);
-        const eased = 1 - Math.pow(1 - progress, 3);
-        element.textContent = `${Math.round(target * eased)}${suffix}`;
-        if (progress < 1) window.requestAnimationFrame(tick);
-      };
-      window.requestAnimationFrame(tick);
-    };
-
-    if ("IntersectionObserver" in window) {
-      const counterObserver = new IntersectionObserver(
-        (entries) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            animateCounter(entry.target);
-            counterObserver.unobserve(entry.target);
-          });
-        },
-        { threshold: 0.4 },
-      );
-      counters.forEach((counter) => counterObserver.observe(counter));
-    } else {
-      counters.forEach(animateCounter);
-    }
-  }
-
   const revealMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   if ("IntersectionObserver" in window && !revealMotion.matches) {
     const headingObserver = new IntersectionObserver((entries) => {
