@@ -3135,6 +3135,14 @@ h3 {
     #0714261f 100%
   );
 }
+.page-hero-video--careers::before {
+  background: linear-gradient(
+    90deg,
+    #050e1fc4 0%,
+    #07142680 45%,
+    #07142633 100%
+  );
+}
 .page-hero-video::after {
   content: "";
   position: absolute;
