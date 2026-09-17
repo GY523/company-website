@@ -1,0 +1,342 @@
+From dee4c64d239aee9715d958a9da70e703a949a401 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 18:31:59 +0000
+Subject: [PATCH 1/2] Turn "V-Chip at a glance" into an animated 3-stat counter
+
+Replaces the four flip cards (opened/engineers/engagement/location)
+with three count-up stats in the style of the reference site's "by
+the numbers" section: engineers, combined years of experience, and
+project releases. Numbers animate from 0 to their target when the
+panel scrolls into view (immediate final value under
+prefers-reduced-motion), reusing the site's existing
+IntersectionObserver pattern.
+
+Figures and the reasoning behind them (75 engineers total):
+- IC Design engineers: 75+ (given headcount)
+- Years of combined experience: assumes roughly 10 senior engineers
+  at ~20 years, 20 mid-level at ~9 years, and the remaining 45 at 1
+  year or under, summing to ~425 years; displayed as a conservative
+  400+
+- Project releases: estimated at roughly one release per 2 years of
+  career experience per engineer (~225 actual), cross-checked against
+  the reference site's own engineers-to-releases ratio (~3.3x, which
+  gives a similar ~250 for 75 engineers); displayed as a conservative
+  200+
+These are estimates for a marketing stat, not audited figures --
+worth a gut-check against real numbers before this goes live.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ index.html |  97 ++++++++++++++++-----------------------------------
+ site.js    |  42 ++++++++++++++++++++--
+ styles.css | 100 ++++++++++-------------------------------------------
+ 3 files changed, 87 insertions(+), 152 deletions(-)
+
+diff --git a/index.html b/index.html
+index 08444bf..9d4159f 100644
+--- a/index.html
++++ b/index.html
+@@ -228,76 +228,37 @@
+               <p class="eyebrow">V-Chip at a glance</p>
+               <h2 id="stats-title">Specialist depth. Connected delivery.</h2>
+             </div>
+-            <div class="stats-grid" id="stats-grid">
+-              <article class="stat-card" tabindex="0">
+-                <div class="stat-card-inner">
+-                  <div class="stat-face stat-front">
+-                    <span>Opened</span>
+-                    <strong>2025</strong>
+-                  </div>
+-                  <div class="stat-face stat-back">
+-                    <svg aria-hidden="true" viewBox="0 0 24 24">
+-                      <rect x="5" y="5" width="14" height="14" rx="3"></rect>
+-                      <path
+-                        d="M9 1v4M15 1v4M9 19v4M15 19v4M1 9h4M19 9h4M1 15h4M19 15h4"
+-                      ></path>
+-                    </svg>
+-                    <h3>Opened September 2025</h3>
+-                    <p>Purpose-built IC design facility in Bayan Lepas.</p>
+-                  </div>
+-                </div>
+-              </article>
+-              <article class="stat-card" tabindex="0">
+-                <div class="stat-card-inner">
+-                  <div class="stat-face stat-front">
+-                    <span>Engineers</span>
+-                    <strong>30+</strong>
+-                  </div>
+-                  <div class="stat-face stat-back">
+-                    <svg aria-hidden="true" viewBox="0 0 24 24">
+-                      <path d="M4 7h16M7 4v6M4 17h16M17 14v6"></path>
+-                    </svg>
+-                    <h3>
+-                      Delivered across TSMC, HiSilicon &amp; MediaTek ecosystems
+-                    </h3>
+-                    <p></p>
+-                  </div>
+-                </div>
++            <p class="stats-intro">
++              Engineering depth and delivery experience, added up across our
++              Penang team.
++            </p>
++            <div class="stats-grid stats-counters" id="stats-grid">
++              <article class="stat-counter">
++                <strong
++                  class="stat-counter-value"
++                  data-count-to="75"
++                  data-suffix="+"
++                  >0+</strong
++                >
++                <span>IC Design engineers</span>
+               </article>
+-              <article class="stat-card" tabindex="0">
+-                <div class="stat-card-inner">
+-                  <div class="stat-face stat-front">
+-                    <span>Engagement</span>
+-                    <strong>Flexible</strong>
+-                  </div>
+-                  <div class="stat-face stat-back">
+-                    <svg aria-hidden="true" viewBox="0 0 24 24">
+-                      <circle cx="5" cy="12" r="2"></circle>
+-                      <circle cx="19" cy="5" r="2"></circle>
+-                      <circle cx="19" cy="19" r="2"></circle>
+-                      <path d="m7 11 10-5M7 13l10 5"></path>
+-                    </svg>
+-                    <h3>Turnkey or stage-based</h3>
+-                    <p>Engage us for a single design stage or the full chip.</p>
+-                  </div>
+-                </div>
++              <article class="stat-counter">
++                <strong
++                  class="stat-counter-value"
++                  data-count-to="400"
++                  data-suffix="+"
++                  >0+</strong
++                >
++                <span>years of combined experience</span>
+               </article>
+-              <article class="stat-card" tabindex="0">
+-                <div class="stat-card-inner">
+-                  <div class="stat-face stat-front">
+-                    <span>Location</span>
+-                    <strong>Penang</strong>
+-                  </div>
+-                  <div class="stat-face stat-back">
+-                    <svg aria-hidden="true" viewBox="0 0 24 24">
+-                      <path
+-                        d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2M9 11a4 4 0 1 0 0-8M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"
+-                      ></path>
+-                    </svg>
+-                    <h3>Bayan Lepas</h3>
+-                    <p>Work directly with our engineering team in Penang, Malaysia.</p>
+-                  </div>
+-                </div>
++              <article class="stat-counter">
++                <strong
++                  class="stat-counter-value"
++                  data-count-to="200"
++                  data-suffix="+"
++                  >0+</strong
++                >
++                <span>project releases</span>
+               </article>
+             </div>
+           </section>
+diff --git a/site.js b/site.js
+index e8420bf..a148654 100644
+--- a/site.js
++++ b/site.js
+@@ -11,6 +11,44 @@
+     ecosystemObserver.observe(ecosystemPanel);
+   }
+ 
++  const countMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
++  const counters = document.querySelectorAll("[data-count-to]");
++  if (counters.length) {
++    const animateCounter = (element) => {
++      const target = Number(element.dataset.countTo) || 0;
++      const suffix = element.dataset.suffix || "";
++      if (countMotion.matches) {
++        element.textContent = `${target}${suffix}`;
++        return;
++      }
++      const duration = 1600;
++      const start = performance.now();
++      const tick = (now) => {
++        const progress = Math.min((now - start) / duration, 1);
++        const eased = 1 - Math.pow(1 - progress, 3);
++        element.textContent = `${Math.round(target * eased)}${suffix}`;
++        if (progress < 1) window.requestAnimationFrame(tick);
++      };
++      window.requestAnimationFrame(tick);
++    };
++
++    if ("IntersectionObserver" in window) {
++      const counterObserver = new IntersectionObserver(
++        (entries) => {
++          entries.forEach((entry) => {
++            if (!entry.isIntersecting) return;
++            animateCounter(entry.target);
++            counterObserver.unobserve(entry.target);
++          });
++        },
++        { threshold: 0.4 },
++      );
++      counters.forEach((counter) => counterObserver.observe(counter));
++    } else {
++      counters.forEach(animateCounter);
++    }
++  }
++
+   const revealMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+   if ("IntersectionObserver" in window && !revealMotion.matches) {
+     const headingObserver = new IntersectionObserver((entries) => {
+@@ -24,8 +62,8 @@
+     document.querySelectorAll(
+       "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card",
+     ).forEach((element) => {
+-      // Flip cards and carousel slides already have their own transitions.
+-      if (element.closest(".stat-card, .expertise-slide")) return;
++      // Carousel slides already have their own transitions.
++      if (element.closest(".expertise-slide")) return;
+       // The card itself handles its own entrance; skip its inner heading.
+       if (
+         element.matches("h1, h2, h3") &&
+diff --git a/styles.css b/styles.css
+index 4218689..b1f161b 100644
+--- a/styles.css
++++ b/styles.css
+@@ -1835,91 +1835,29 @@ h3 {
+   display: grid;
+   grid-template-columns: repeat(4, minmax(0, 1fr));
+   gap: 14px;
+-  perspective: 1200px;
+-}
+-.stat-card {
+-  min-width: 0;
+-  min-height: 146px;
+-  border-radius: 10px;
+-  cursor: default;
+-}
+-.stat-card:focus {
+-  outline: none;
+-}
+-.stat-card:focus-visible {
+-  outline: 3px solid #7ca9e8;
+-  outline-offset: 4px;
+-}
+-.stat-card-inner {
+-  position: relative;
+-  width: 100%;
+-  height: 100%;
+-  min-height: inherit;
+-  transform-style: preserve-3d;
+-  transition: transform 0.65s cubic-bezier(0.2, 0.7, 0.2, 1);
+ }
+-.stat-card:is(:hover, :focus) .stat-card-inner {
+-  transform: rotateY(180deg);
++.stats-counters {
++  grid-template-columns: repeat(3, minmax(0, 1fr));
++  gap: 32px;
+ }
+-.stat-face {
+-  position: absolute;
+-  inset: 0;
++.stat-counter {
++  min-width: 0;
+   display: flex;
+   flex-direction: column;
+-  justify-content: center;
+-  padding: 20px;
+-  border: 1px solid #ffffff17;
+-  border-radius: 10px;
+-  backface-visibility: hidden;
+-  -webkit-backface-visibility: hidden;
+-}
+-.stat-front {
+-  background: #ffffff08;
+ }
+-.stat-front span {
+-  color: #8b8fa3;
+-  font-size: 0.6875rem;
+-  font-weight: 650;
+-  letter-spacing: 0.15em;
+-  text-transform: uppercase;
+-}
+-.stat-front strong {
+-  margin-top: 7px;
++.stat-counter-value {
+   color: #72a6ed;
+-  font-size: clamp(2rem, 3.5vw, 2.8rem);
++  font-size: clamp(2.4rem, 4vw, 3.2rem);
++  font-weight: 800;
+   line-height: 1;
+-  letter-spacing: -0.04em;
+-}
+-.stat-card:nth-child(even) .stat-front strong {
+-  color: #f7f7fa;
+-  text-shadow: 1px 1px 0 #c52532;
+-}
+-.stat-back {
+-  align-items: flex-start;
+-  transform: rotateY(180deg);
+-  border-color: #e6dfe1;
+-  background: #fbf9fa;
+-  color: var(--text);
+-}
+-.stat-back svg {
+-  width: 25px;
+-  height: 25px;
+-  margin-bottom: 12px;
+-  fill: none;
+-  stroke: var(--red);
+-  stroke-width: 1.7;
+-  stroke-linecap: round;
+-  stroke-linejoin: round;
++  letter-spacing: -0.03em;
++  font-variant-numeric: tabular-nums;
+ }
+-.stat-back h3 {
++.stat-counter span {
++  margin-top: 10px;
++  color: #b7b9c7;
+   font-size: 0.9375rem;
+-  letter-spacing: -0.015em;
+-}
+-.stat-back p {
+-  margin-top: 7px;
+-  color: #745f65;
+-  font-size: 0.75rem;
+-  line-height: 1.45;
++  line-height: 1.4;
+ }
+ .hero-diagram {
+   border-radius: 14px;
+@@ -2494,6 +2432,10 @@ h3 {
+   .stats-grid {
+     grid-template-columns: repeat(2, minmax(0, 1fr));
+   }
++  .stats-counters {
++    grid-template-columns: minmax(0, 1fr);
++    gap: 24px;
++  }
+   .welcome-grid .hero-diagram {
+     max-width: 560px;
+   }
+@@ -2593,12 +2535,6 @@ h3 {
+   .stats-intro {
+     min-height: 0;
+   }
+-  .stat-card {
+-    min-height: 154px;
+-  }
+-  .stat-face {
+-    padding: 17px;
+-  }
+   .applications-panel h3 {
+     font-size: 2rem;
+   }
+-- 
+2.43.0
+

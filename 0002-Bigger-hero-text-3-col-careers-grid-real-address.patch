@@ -1,0 +1,190 @@
+From 26e293d0aba4a32807c9001bd939b0351f161b57 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Mon, 14 Sep 2026 09:24:18 +0000
+Subject: [PATCH 2/2] Bigger hero text, 3-col careers grid, real address
+
+Increase font sizes for the About/Careers hero eyebrow, badges
+("6 open disciplines", location, "Apply by email"), and the careers
+card action text. Switch the careers grid to a fixed 3-column layout
+(2 then 1 column on smaller screens). Add V-Chip's Penang office
+address and a Google Maps link to the About page's "Our Penang
+presence" card, and correct the hero location badges on both pages
+from the placeholder "Bayan Lepas" to Gelugor.
+
+Extend the existing content-reveal system (site.js/styles.css) to
+also cover the About/Careers hero eyebrow, badge row, and button row,
+instead of adding a second parallel reveal mechanism -- scoped to 1s
+via --motion-reveal on .page-hero-video so the hero cascades in
+quickly while the rest of the site keeps its slower pace.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ about.html   | 22 ++++++++++++++++++++--
+ careers.html |  2 +-
+ site.js      |  6 +++++-
+ styles.css   | 30 +++++++++++++++++++-----------
+ 4 files changed, 45 insertions(+), 15 deletions(-)
+
+diff --git a/about.html b/about.html
+index 40f1ed2..1e4703c 100644
+--- a/about.html
++++ b/about.html
+@@ -166,7 +166,7 @@
+                 ></path>
+                 <circle cx="12" cy="10" r="2.5"></circle>
+               </svg>
+-              Bayan Lepas, Penang
++              Gelugor, Penang
+             </span>
+           </div>
+           <div class="button-row">
+@@ -229,7 +229,25 @@
+                 <path d="M7 17 17 7M7 7h10v10"></path></svg
+             ></a>
+             <div class="location-note">
+-              <strong>Bayan Lepas</strong><span>Penang, Malaysia</span>
++              <strong>V-Chip Penang Office</strong>
++              <span
++                >Block 2-03-09 &amp; 2-03-10, Level 3, Udini Square, Lebuh
++                Tunku Kudin 3, 11700 Gelugor, Penang.</span
++              >
++              <a
++                class="text-link"
++                href="https://maps.app.goo.gl/hf4rNgG2epcYzhmx5"
++                target="_blank"
++                rel="noopener"
++                >View on Google Maps
++                <svg
++                  class="link-arrow"
++                  aria-hidden="true"
++                  focusable="false"
++                  viewBox="0 0 24 24"
++                >
++                  <path d="M7 17 17 7M7 7h10v10"></path></svg
++              ></a>
+             </div>
+           </div>
+         </div>
+diff --git a/careers.html b/careers.html
+index b0d2e7a..322a2e9 100644
+--- a/careers.html
++++ b/careers.html
+@@ -152,7 +152,7 @@
+                 ></path>
+                 <circle cx="12" cy="10" r="2.5"></circle>
+               </svg>
+-              Bayan Lepas, Penang
++              Gelugor, Penang
+             </span>
+             <span class="hero-badge">
+               <svg aria-hidden="true" viewBox="0 0 24 24">
+diff --git a/site.js b/site.js
+index 95287ee..4327bf2 100644
+--- a/site.js
++++ b/site.js
+@@ -26,12 +26,16 @@
+     }, { threshold: 0.15 });
+ 
+     document.querySelectorAll(
+-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede",
++      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row",
+     ).forEach((element) => {
+       // Flip cards and carousel slides already have their own transitions.
+       if (element.closest(".stat-card, .expertise-slide")) return;
+       if (element.matches(".lede")) {
+         element.style.setProperty("--reveal-delay", "100ms");
++      } else if (element.matches(".hero-badge-row")) {
++        element.style.setProperty("--reveal-delay", "200ms");
++      } else if (element.matches(".page-hero-video .button-row")) {
++        element.style.setProperty("--reveal-delay", "300ms");
+       } else if (element.matches(".button-row")) {
+         element.style.setProperty("--reveal-delay", "200ms");
+       }
+diff --git a/styles.css b/styles.css
+index 707d8ed..b8ee45b 100644
+--- a/styles.css
++++ b/styles.css
+@@ -910,7 +910,7 @@ main:focus {
+ }
+ .careers-list {
+   display: grid;
+-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
++  grid-template-columns: repeat(3, 1fr);
+   gap: 22px;
+   padding: 0;
+   margin-top: 8px;
+@@ -991,8 +991,8 @@ main:focus {
+   margin-top: auto;
+   padding-top: 18px;
+   color: var(--blue);
+-  font-size: 0.9375rem;
+-  font-weight: 600;
++  font-size: 1.0625rem;
++  font-weight: 700;
+ }
+ .career-note {
+   font-size: 0.9375rem;
+@@ -1095,6 +1095,9 @@ main:focus {
+   .contact-grid {
+     gap: 60px;
+   }
++  .careers-list {
++    grid-template-columns: repeat(2, 1fr);
++  }
+ }
+ @media (max-width: 1300px) {
+   .header-inner {
+@@ -2649,6 +2652,10 @@ h3 {
+ }
+ .page-hero-video .eyebrow {
+   color: #f06b76;
++  font-size: 1rem;
++}
++.page-hero-video {
++  --motion-reveal: 1s cubic-bezier(0.2, 0.7, 0.2, 1);
+ }
+ .page-hero-video h1 {
+   color: #fff;
+@@ -2667,20 +2674,21 @@ h3 {
+ .hero-badge {
+   display: inline-flex;
+   align-items: center;
+-  gap: 8px;
+-  padding: 9px 16px;
++  gap: 9px;
++  padding: 11px 20px;
+   border: 1px solid #ffffff2e;
+   border-radius: 999px;
+   background: #ffffff14;
+   backdrop-filter: blur(6px);
+   color: #eef1fb;
+-  font-size: 0.8125rem;
+-  font-weight: 600;
++  font-size: 1.0625rem;
++  font-weight: 650;
+   letter-spacing: 0.02em;
+ }
+ .hero-badge svg {
+-  width: 15px;
+-  height: 15px;
++  width: 18px;
++  height: 18px;
++  flex-shrink: 0;
+   fill: none;
+   stroke: #f06b76;
+   stroke-width: 2;
+@@ -2744,8 +2752,8 @@ h3 {
+     padding-block: 104px 56px;
+   }
+   .hero-badge {
+-    font-size: 0.75rem;
+-    padding: 8px 13px;
++    font-size: 0.875rem;
++    padding: 9px 15px;
+   }
+ }
+ @media (prefers-reduced-motion: reduce) {
+-- 
+2.43.0
+

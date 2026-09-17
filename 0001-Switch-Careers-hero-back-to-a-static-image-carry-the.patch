@@ -1,0 +1,179 @@
+From 4b0d69b1b49597522cd15cd5c8cfd9f4dd1ea1d8 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 06:11:04 +0000
+Subject: [PATCH] Switch Careers hero back to a static image; carry the pending
+ Contact Us panel fix
+
+Removes the <video> element from the Careers hero and points
+.page-hero-video--careers at a static background image
+(assets/images/careers-background.jpeg, not yet in the repo) instead,
+mirroring how the About page already does this. Added the matching
+prefers-reduced-motion fallback override too, since without it the
+generic .page-hero-video fallback rule would have silently overridden
+the new background with home-background.jpg. careers-hero.mp4 is left
+in place, unused, in case a video background comes back later.
+
+Also carries the "match Contact Us panel to header's navy background"
+change from the previous patch, which hadn't landed yet.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ assets/videos/README.md | 39 ++++++++++++++++++++++-----------------
+ careers.html            | 12 +-----------
+ styles.css              | 37 +++++++++++++++++++++++++++++++++++--
+ 3 files changed, 58 insertions(+), 30 deletions(-)
+
+diff --git a/assets/videos/README.md b/assets/videos/README.md
+index 98341cb..31997b8 100644
+--- a/assets/videos/README.md
++++ b/assets/videos/README.md
+@@ -1,23 +1,28 @@
+ # Hero background video
+ 
+-The Careers page is wired up to play a looping background video behind
+-the page hero (`.page-hero-video` in `styles.css`). The About page
+-used to as well, but now uses a static image (`assets/images/about.png`)
+-instead.
++Neither the About nor Careers page currently uses a background video
++-- both use a static image instead (`assets/images/about.png` and
++`assets/images/careers-background.jpeg`). `.page-hero-video` in
++`styles.css` still supports a `<video class="hero-video-media">`
++background if a page wants one again.
+ 
+-- `careers-hero.mp4` — used on `careers.html`. **In place** (a
+-  CPU/circuit animation, compressed from 25.7MB to ~5MB — see below;
+-  originally used on the About page before it moved here). Poster
+-  frame: `assets/images/careers-hero-poster.jpg`, extracted straight
+-  from the video so there's no flash of a different image before
+-  playback starts.
++- `careers-hero.mp4` — **currently unused.** Sitting here in case it's
++  wanted again (a CPU/circuit animation, compressed from 25.7MB to
++  ~5MB — see below; it's moved between the About and Careers pages a
++  couple of times already). Poster frame:
++  `assets/images/careers-hero-poster.jpg`, extracted straight from the
++  video so there's no flash of a different image before playback
++  starts.
+ 
+-The video element also gets `filter: brightness(0.4) saturate(1.05)`
+-plus a dark gradient scrim (both in `styles.css`, under
+-`.hero-video-media` / `.page-hero-video::before`) so bright or busy
+-footage never fights the heading text for contrast. Keep that in mind
+-if you swap in new footage — brighter source video is fine, the filter
+-absorbs it.
++To wire a video back in on a page, add the `<video>` markup (see the
++`about.html`/`careers.html` git history for the exact pattern) and
++give the section's `page-hero-video--*` modifier class a
++`.hero-video-media` filter instead of a background-image. The video
++element gets `filter: brightness(0.4) saturate(1.05)` plus a dark
++gradient scrim (both in `styles.css`, under `.hero-video-media` /
++`.page-hero-video::before`) so bright or busy footage never fights the
++heading text for contrast. Keep that in mind if you swap in new
++footage — brighter source video is fine, the filter absorbs it.
+ 
+ ## Recommended specs
+ 
+@@ -28,7 +33,7 @@ absorbs it.
+   muted)
+ - File size: keep it under ~6-8MB so the hero loads quickly. Trim/compress
+   with `ffmpeg`, e.g.:
+-  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart careers-hero.mp4`
++  `ffmpeg -i input.mov -vf scale=1920:-2 -an -c:v libx264 -crf 27 -preset slow -pix_fmt yuv420p -movflags +faststart hero.mp4`
+ - Content ideas: clean room / fab floor, chip wafer close-ups, PCB or die
+   macro shots, engineers at workstations — anything that reads as
+   "silicon engineering" without distracting from the text on top
+diff --git a/careers.html b/careers.html
+index 5b6b079..8d378c1 100644
+--- a/careers.html
++++ b/careers.html
+@@ -114,17 +114,7 @@
+       </div>
+     </header>
+     <main id="main" tabindex="-1">
+-      <section class="page-hero page-hero-video">
+-        <video
+-          class="hero-video-media"
+-          poster="assets/images/careers-hero-poster.jpg"
+-          autoplay
+-          muted
+-          loop
+-          playsinline
+-        >
+-          <source src="assets/videos/careers-hero.mp4" type="video/mp4">
+-        </video>
++      <section class="page-hero page-hero-video page-hero-video--careers">
+         <div class="container">
+           <nav class="breadcrumb" aria-label="Breadcrumb">
+             <ol>
+diff --git a/styles.css b/styles.css
+index 1e7f0f5..2055e6c 100644
+--- a/styles.css
++++ b/styles.css
+@@ -879,15 +879,37 @@ main:focus {
+ }
+ .contact-panel {
+   padding: 40px;
+-  background: var(--surface);
+-  border-top: 3px solid var(--blue);
++  background: var(--navy-dark);
++  border-top: 3px solid var(--red);
++  border-radius: 0 0 14px 14px;
++}
++.contact-panel .eyebrow {
++  color: #f4767e;
+ }
+ .contact-panel h2 {
++  color: #fff;
+   font-size: 2rem;
+ }
+ .contact-panel .button {
+   margin-top: 6px;
+ }
++.contact-panel .form-field label {
++  color: #9fb0c8;
++}
++.contact-panel .form-consent {
++  color: #c2d2e2;
++}
++.contact-panel .fine-print {
++  color: #9fb0c8;
++}
++.contact-panel .fine-print a {
++  color: #9dccfa;
++  text-decoration: underline;
++  text-underline-offset: 3px;
++}
++.contact-panel .fine-print a:hover {
++  color: #fff;
++}
+ .contact-form {
+   display: flex;
+   flex-direction: column;
+@@ -3082,6 +3104,11 @@ h3 {
+   background: var(--navy-dark) url("assets/images/about.png") center bottom /
+     cover no-repeat;
+ }
++.page-hero-video--careers {
++  background: var(--navy-dark)
++    url("assets/images/careers-background.jpeg") center bottom / cover
++    no-repeat;
++}
+ .hero-video-media {
+   position: absolute;
+   inset: 0;
+@@ -3267,6 +3294,12 @@ h3 {
+       linear-gradient(90deg, #050e1fb8 0%, #0714263d 100%),
+       var(--navy) url("assets/images/about.png") center bottom / cover no-repeat;
+   }
++  .page-hero-video--careers {
++    background:
++      linear-gradient(180deg, #081426d9 0%, #0a1830ea 60%, #0a1830 100%),
++      var(--navy) url("assets/images/careers-background.jpeg") center bottom /
++        cover no-repeat;
++  }
+   .page-hero-video::before {
+     background: none;
+   }
+-- 
+2.43.0
+

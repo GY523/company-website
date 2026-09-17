@@ -1,0 +1,134 @@
+From 0e30063e2c3e40519fe64562bcec05dc17364d35 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 18:51:16 +0000
+Subject: [PATCH] Full-bleed the header (not footer), add motion to "How we
+ work" cards
+
+Previous "no gap" request was meant for the header, not the footer --
+reverts the footer back to its normal container gutter and applies
+the edge-to-edge treatment to the site header instead.
+
+The "Fit the engagement to your team" cards (About page only, scoped
+via .section-band-navy so Careers' cards and the About "values" grid
+are untouched) now:
+- slide/scale up into view with a staggered delay per card when the
+  section scrolls into view, reusing the site's existing
+  IntersectionObserver reveal system
+- pop and tilt their number badge on hover, on top of the card's
+  existing lift-and-shadow hover
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ site.js    |  4 ++--
+ styles.css | 38 +++++++++++++++++++++++++++++++++-----
+ 2 files changed, 35 insertions(+), 7 deletions(-)
+
+diff --git a/site.js b/site.js
+index a148654..95031ba 100644
+--- a/site.js
++++ b/site.js
+@@ -60,14 +60,14 @@
+     }, { threshold: 0.15 });
+ 
+     document.querySelectorAll(
+-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card",
++      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card, .section-band-navy .engagement-grid--cards > article",
+     ).forEach((element) => {
+       // Carousel slides already have their own transitions.
+       if (element.closest(".expertise-slide")) return;
+       // The card itself handles its own entrance; skip its inner heading.
+       if (
+         element.matches("h1, h2, h3") &&
+-        element.closest(".expertise-showcase-card")
++        element.closest(".expertise-showcase-card, .engagement-grid--cards > article")
+       )
+         return;
+       if (element.matches(".lede")) {
+diff --git a/styles.css b/styles.css
+index 0d9e0b9..8ac51cf 100644
+--- a/styles.css
++++ b/styles.css
+@@ -255,6 +255,11 @@ main:focus {
+   position: sticky;
+   top: 0;
+ }
++.site-header .container {
++  width: 100%;
++  max-width: none;
++  margin-inline: 0;
++}
+ .header-inner {
+   display: flex;
+   align-items: center;
+@@ -1021,11 +1026,6 @@ main:focus {
+   background: var(--navy-dark);
+   color: #c2d2e2;
+ }
+-.site-footer .container {
+-  width: 100%;
+-  max-width: none;
+-  margin-inline: 0;
+-}
+ .footer-grid {
+   display: grid;
+   grid-template-columns: 1.4fr 1.4fr 0.75fr 1fr;
+@@ -1959,6 +1959,9 @@ h3 {
+   .expertise-showcase-card.content-reveal {
+     animation-name: expertise-card-slide-in;
+   }
++  .section-band-navy .engagement-grid--cards > article.content-reveal {
++    animation-name: engagement-card-rise;
++  }
+ }
+ @keyframes content-rise {
+   from {
+@@ -1980,6 +1983,16 @@ h3 {
+     transform: translateX(0);
+   }
+ }
++@keyframes engagement-card-rise {
++  from {
++    opacity: 0;
++    transform: translateY(36px) scale(0.94);
++  }
++  to {
++    opacity: 1;
++    transform: translateY(0) scale(1);
++  }
++}
+ @keyframes ecosystem-rise {
+   from {
+     opacity: 0;
+@@ -3039,6 +3052,20 @@ h3 {
+   font-size: 0.9375rem;
+   font-weight: 700;
+   letter-spacing: normal;
++  transition: transform var(--motion-smooth), box-shadow var(--motion-smooth);
++}
++.section-band-navy .engagement-grid--cards > article:nth-child(1) {
++  --reveal-delay: 0ms;
++}
++.section-band-navy .engagement-grid--cards > article:nth-child(2) {
++  --reveal-delay: 140ms;
++}
++.section-band-navy .engagement-grid--cards > article:nth-child(3) {
++  --reveal-delay: 280ms;
++}
++.section-band-navy .engagement-grid--cards > article:hover .step-number {
++  transform: scale(1.15) rotate(-8deg);
++  box-shadow: 0 10px 22px -6px #c5253270;
+ }
+ .engagement-grid--values > * {
+   background: #fff;
+@@ -3114,6 +3141,7 @@ h3 {
+ /* About "How we work" override: match the About hero's dark navy instead of blue. */
+ .section-band-navy {
+   background: var(--navy-dark);
++  --motion-reveal: 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+ }
+ 
+ /* Homepage "Our Expertise" showcase grid */
+-- 
+2.43.0
+

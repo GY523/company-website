@@ -1,0 +1,513 @@
+From d9baade45e7f9098a245ceb7b4478ca5f1149c88 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 01:22:59 +0000
+Subject: [PATCH 2/3] Turn career listings into expand-in-place job
+ descriptions
+
+Each "Find your specialty" card was previously a single mailto link --
+clicking anywhere on it immediately opened the user's email client.
+Now the card itself is a toggle button: clicking it expands a job
+description panel in place (requirements, soft skills), and only the
+"Apply by email" link inside that panel actually opens the mail
+client. Collapsing re-hides the panel from the accessibility tree
+after its transition finishes so it's not keyboard-focusable while
+closed.
+
+Renamed "Analog IC Design Engineer" to "Custom Layout Engineer" and
+filled in its JD plus Physical Design Engineer's JD from the flyer
+content provided. Design Verification Engineer gets a placeholder JD
+for now, to be filled in later.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ careers.html | 248 +++++++++++++++++++++++++++++++++++++++++++--------
+ site.js      |  19 ++++
+ styles.css   |  95 +++++++++++++++++++-
+ 3 files changed, 323 insertions(+), 39 deletions(-)
+
+diff --git a/careers.html b/careers.html
+index 7719b02..0d592a0 100644
+--- a/careers.html
++++ b/careers.html
+@@ -197,84 +197,260 @@
+             the subject line.
+           </p>
+           <ul class="careers-list">
+-            <li>
+-              <a
++            <li class="career-item">
++              <button
+                 class="career-row"
+-                href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Analog%20IC%20Design%20Engineer"
+-                ><span class="career-icon" aria-hidden="true"
++                type="button"
++                aria-expanded="false"
++                aria-controls="career-jd-layout"
++                id="career-toggle-layout"
++              >
++                <span class="career-icon" aria-hidden="true"
+                   ><svg viewBox="0 0 24 24"
+-                    ><path d="M2 12h4l2-7 4 14 3-11 2 4h5"></path></svg></span
+-                ><span class="career-title">Analog IC Design Engineer</span
+-                ><span class="career-location"
++                    ><path d="M2 12h4l2-7 4 14 3-11 2 4h5"></path></svg
++                ></span>
++                <span class="career-title">Custom Layout Engineer</span>
++                <span class="career-location"
+                   ><svg aria-hidden="true" viewBox="0 0 24 24"
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+                   >Malaysia</span
+-                ><span class="career-action"
+-                  >Apply by email
++                >
++                <span class="career-toggle"
++                  >View job description
+                   <svg
+-                    class="link-arrow"
++                    class="career-chevron"
+                     aria-hidden="true"
+                     focusable="false"
+                     viewBox="0 0 24 24"
+                   >
+-                    <path d="M7 17 17 7M7 7h10v10"></path></svg></span
+-              ></a>
++                    <path d="m6 9 6 6 6-6"></path>
++                  </svg>
++                </span>
++              </button>
++              <div
++                class="career-jd"
++                id="career-jd-layout"
++                role="region"
++                aria-labelledby="career-toggle-layout"
++                hidden
++              >
++                <div class="career-jd-inner">
++                  <h4>Requirements</h4>
++                  <ul>
++                    <li>
++                      Bachelor's or Master's degree in Electrical Engineering
++                      or related field
++                    </li>
++                    <li>
++                      Basic understanding of CMOS process and IC layout
++                      principles
++                    </li>
++                    <li>
++                      Familiar with Cadence Virtuoso/Synopsys Custom Compiler
++                      layout tool
++                    </li>
++                    <li>
++                      Exposure to DRC/LVS and physical verification flows
++                      (Calibre or ICV preferred)
++                    </li>
++                    <li>
++                      Scripting basics: familiar with SKILL, Python, or Tcl
++                      for layout automation and efficiency improvements
++                    </li>
++                    <li>
++                      Familiarity with analog building blocks such as
++                      op-amps, bandgaps, and current mirrors
++                    </li>
++                  </ul>
++                  <h4>Soft Skills</h4>
++                  <ul>
++                    <li>Strong analytical and problem-solving skills</li>
++                    <li>
++                      Excellent verbal and written communication skills
++                    </li>
++                    <li>
++                      Strong interpersonal skills and ability to collaborate
++                      across global teams
++                    </li>
++                  </ul>
++                  <a
++                    class="career-action"
++                    href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Custom%20Layout%20Engineer"
++                    >Apply by email
++                    <svg
++                      class="link-arrow"
++                      aria-hidden="true"
++                      focusable="false"
++                      viewBox="0 0 24 24"
++                    >
++                      <path d="M7 17 17 7M7 7h10v10"></path>
++                    </svg>
++                  </a>
++                </div>
++              </div>
+             </li>
+-            <li>
+-              <a
++            <li class="career-item">
++              <button
+                 class="career-row"
+-                href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Design%20Verification%20Engineer"
+-                ><span class="career-icon" aria-hidden="true"
++                type="button"
++                aria-expanded="false"
++                aria-controls="career-jd-verification"
++                id="career-toggle-verification"
++              >
++                <span class="career-icon" aria-hidden="true"
+                   ><svg viewBox="0 0 24 24"
+                     ><path
+                       d="M12 3 4 6v6c0 4.6 3.2 8.3 8 9 4.8-.7 8-4.4 8-9V6l-8-3Z"
+-                    ></path><path d="m9 12 2 2 4-4"></path></svg></span
+-                ><span class="career-title">Design Verification Engineer</span
+-                ><span class="career-location"
++                    ></path><path d="m9 12 2 2 4-4"></path></svg
++                ></span>
++                <span class="career-title">Design Verification Engineer</span>
++                <span class="career-location"
+                   ><svg aria-hidden="true" viewBox="0 0 24 24"
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+                   >Malaysia</span
+-                ><span class="career-action"
+-                  >Apply by email
++                >
++                <span class="career-toggle"
++                  >View job description
+                   <svg
+-                    class="link-arrow"
++                    class="career-chevron"
+                     aria-hidden="true"
+                     focusable="false"
+                     viewBox="0 0 24 24"
+                   >
+-                    <path d="M7 17 17 7M7 7h10v10"></path></svg></span
+-              ></a>
++                    <path d="m6 9 6 6 6-6"></path>
++                  </svg>
++                </span>
++              </button>
++              <div
++                class="career-jd"
++                id="career-jd-verification"
++                role="region"
++                aria-labelledby="career-toggle-verification"
++                hidden
++              >
++                <div class="career-jd-inner">
++                  <p>
++                    Full job description coming soon. Email us directly and
++                    the team can walk you through the role in the meantime.
++                  </p>
++                  <a
++                    class="career-action"
++                    href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Design%20Verification%20Engineer"
++                    >Apply by email
++                    <svg
++                      class="link-arrow"
++                      aria-hidden="true"
++                      focusable="false"
++                      viewBox="0 0 24 24"
++                    >
++                      <path d="M7 17 17 7M7 7h10v10"></path>
++                    </svg>
++                  </a>
++                </div>
++              </div>
+             </li>
+-            <li>
+-              <a
++            <li class="career-item">
++              <button
+                 class="career-row"
+-                href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Physical%20Design%20Engineer"
+-                ><span class="career-icon" aria-hidden="true"
++                type="button"
++                aria-expanded="false"
++                aria-controls="career-jd-physical"
++                id="career-toggle-physical"
++              >
++                <span class="career-icon" aria-hidden="true"
+                   ><svg viewBox="0 0 24 24"
+                     ><rect x="4" y="3" width="16" height="7" rx="2"></rect
+                     ><rect x="4" y="14" width="16" height="7" rx="2"></rect
+-                    ><path d="M8 6.5h.01M8 17.5h.01"></path></svg></span
+-                ><span class="career-title">Physical Design Engineer</span
+-                ><span class="career-location"
++                    ><path d="M8 6.5h.01M8 17.5h.01"></path></svg
++                ></span>
++                <span class="career-title">Physical Design Engineer</span>
++                <span class="career-location"
+                   ><svg aria-hidden="true" viewBox="0 0 24 24"
+                     ><path
+                       d="M12 21s-7-5.2-7-11a7 7 0 0 1 14 0c0 5.8-7 11-7 11Z"
+                     ></path><circle cx="12" cy="10" r="2.5"></circle></svg
+                   >Malaysia</span
+-                ><span class="career-action"
+-                  >Apply by email
++                >
++                <span class="career-toggle"
++                  >View job description
+                   <svg
+-                    class="link-arrow"
++                    class="career-chevron"
+                     aria-hidden="true"
+                     focusable="false"
+                     viewBox="0 0 24 24"
+                   >
+-                    <path d="M7 17 17 7M7 7h10v10"></path></svg></span
+-              ></a>
++                    <path d="m6 9 6 6 6-6"></path>
++                  </svg>
++                </span>
++              </button>
++              <div
++                class="career-jd"
++                id="career-jd-physical"
++                role="region"
++                aria-labelledby="career-toggle-physical"
++                hidden
++              >
++                <div class="career-jd-inner">
++                  <h4>Requirements</h4>
++                  <ul>
++                    <li>Bachelor's degree or higher in EE, CS or related field</li>
++                    <li>
++                      Experience in floorplan, P&amp;R, timing closure,
++                      clock, power, and design optimization on advanced
++                      nodes
++                    </li>
++                    <li>
++                      Experience with SoC/ASIC design methodologies and
++                      tools
++                    </li>
++                    <li>
++                      Full chip or block level ownership from architecture
++                      to GDSII, driving multiple complex designs to
++                      production
++                    </li>
++                    <li>
++                      Basic understanding of RTL design (Verilog / VHDL)
++                    </li>
++                    <li>
++                      Familiarity with physical design signoff requirements
++                      and flows
++                    </li>
++                    <li>
++                      Experience with Cadence and/or Synopsys physical
++                      design tools/flows
++                    </li>
++                    <li>Proficiency in scripting skills (TCL, Perl, Python)</li>
++                  </ul>
++                  <h4>Soft Skills</h4>
++                  <ul>
++                    <li>Strong analytical and problem-solving skills</li>
++                    <li>
++                      Excellent verbal and written communication skills
++                    </li>
++                    <li>
++                      Strong interpersonal skills and ability to collaborate
++                      across global teams
++                    </li>
++                  </ul>
++                  <a
++                    class="career-action"
++                    href="mailto:vchip_pg@vchip-global.com?subject=Application%3A%20Physical%20Design%20Engineer"
++                    >Apply by email
++                    <svg
++                      class="link-arrow"
++                      aria-hidden="true"
++                      focusable="false"
++                      viewBox="0 0 24 24"
++                    >
++                      <path d="M7 17 17 7M7 7h10v10"></path>
++                    </svg>
++                  </a>
++                </div>
++              </div>
+             </li>
+           </ul>
+           <p class="career-note">
+diff --git a/site.js b/site.js
+index 95031ba..b6d2e36 100644
+--- a/site.js
++++ b/site.js
+@@ -91,6 +91,25 @@
+     });
+   }
+ 
++  document.querySelectorAll(".career-row[aria-controls]").forEach((toggle) => {
++    const panel = document.getElementById(toggle.getAttribute("aria-controls"));
++    if (!panel) return;
++    toggle.addEventListener("click", () => {
++      const open = toggle.getAttribute("aria-expanded") === "true";
++      if (open) {
++        toggle.setAttribute("aria-expanded", "false");
++        panel.classList.remove("is-open");
++        window.setTimeout(() => {
++          if (toggle.getAttribute("aria-expanded") !== "true") panel.hidden = true;
++        }, 260);
++      } else {
++        panel.hidden = false;
++        toggle.setAttribute("aria-expanded", "true");
++        window.requestAnimationFrame(() => panel.classList.add("is-open"));
++      }
++    });
++  });
++
+   const scrollTopButton = document.querySelector("[data-scroll-top]");
+   if (scrollTopButton) {
+     const toggleScrollTop = () => {
+diff --git a/styles.css b/styles.css
+index bcf8c9e..9568970 100644
+--- a/styles.css
++++ b/styles.css
+@@ -925,15 +925,21 @@ main:focus {
+ .careers-list {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
++  align-items: start;
+   gap: 22px;
+   padding: 0;
+   margin-top: 8px;
+   list-style: none;
+ }
++.career-item {
++  display: flex;
++  flex-direction: column;
++}
+ .career-row {
+   display: flex;
+   flex-direction: column;
+   align-items: flex-start;
++  width: 100%;
+   height: 100%;
+   gap: 8px;
+   padding: 30px 26px 26px;
+@@ -941,23 +947,37 @@ main:focus {
+   border-radius: 16px;
+   background: #fff;
+   box-shadow: 0 10px 26px -22px #17203614;
++  font: inherit;
++  color: inherit;
++  text-align: left;
++  cursor: pointer;
+   transition:
+     background-color var(--motion-fast),
+     border-color var(--motion-fast),
+     box-shadow var(--motion-smooth),
+     transform var(--motion-smooth);
+ }
+-.career-row:hover {
++.career-row:hover,
++.career-row[aria-expanded="true"] {
+   background: var(--blue);
+   border-color: var(--blue);
+   box-shadow: 0 22px 44px -24px #17203630;
++}
++.career-row:hover {
+   transform: translateY(-6px);
+ }
+ .career-row:hover .career-title,
+ .career-row:hover .career-location,
+-.career-row:hover .career-action {
++.career-row:hover .career-toggle,
++.career-row[aria-expanded="true"] .career-title,
++.career-row[aria-expanded="true"] .career-location,
++.career-row[aria-expanded="true"] .career-toggle {
+   color: #fff;
+ }
++.career-row[aria-expanded="true"] {
++  border-bottom-left-radius: 0;
++  border-bottom-right-radius: 0;
++}
+ .career-icon {
+   display: inline-flex;
+   align-items: center;
+@@ -1005,7 +1025,7 @@ main:focus {
+   stroke: currentColor;
+   stroke-width: 2;
+ }
+-.career-action {
++.career-toggle {
+   display: inline-flex;
+   align-items: center;
+   gap: 8px;
+@@ -1016,6 +1036,75 @@ main:focus {
+   font-weight: 700;
+   transition: color var(--motion-fast);
+ }
++.career-chevron {
++  width: 18px;
++  height: 18px;
++  fill: none;
++  stroke: currentColor;
++  stroke-width: 2.2;
++  stroke-linecap: round;
++  stroke-linejoin: round;
++  transition: transform var(--motion-smooth);
++}
++.career-row[aria-expanded="true"] .career-chevron {
++  transform: rotate(180deg);
++}
++.career-jd {
++  display: grid;
++  grid-template-rows: 0fr;
++  overflow: hidden;
++  border: 1px solid var(--line);
++  border-top: none;
++  border-radius: 0 0 16px 16px;
++  background: #fff;
++  transition: grid-template-rows var(--motion-smooth);
++}
++.career-jd.is-open {
++  grid-template-rows: 1fr;
++}
++.career-jd-inner {
++  min-height: 0;
++  overflow: hidden;
++  padding: 0 26px;
++}
++.career-jd.is-open .career-jd-inner {
++  padding: 4px 26px 26px;
++}
++.career-jd h4 {
++  margin-top: 18px;
++  color: var(--text);
++  font-size: 0.9375rem;
++  font-weight: 700;
++}
++.career-jd h4:first-child {
++  margin-top: 4px;
++}
++.career-jd ul {
++  margin: 10px 0 0;
++  padding-left: 20px;
++  color: var(--muted);
++  font-size: 0.875rem;
++  line-height: 1.55;
++}
++.career-jd li {
++  margin-bottom: 6px;
++}
++.career-jd p {
++  margin-top: 4px;
++  color: var(--muted);
++  font-size: 0.9375rem;
++  line-height: 1.55;
++}
++.career-action {
++  display: inline-flex;
++  align-items: center;
++  gap: 8px;
++  margin-top: 18px;
++  color: var(--blue);
++  font-size: 1.0625rem;
++  font-weight: 700;
++  transition: color var(--motion-fast);
++}
+ .career-note {
+   font-size: 0.9375rem;
+   color: var(--muted);
+-- 
+2.43.0
+

@@ -1,0 +1,247 @@
+From 0a6c44e0e194104946eba154727809ca019c7a40 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Tue, 15 Sep 2026 08:03:01 +0000
+Subject: [PATCH] Refine "Our Expertise": navy theme, white icons, scroll
+ slide-in
+
+Match the section background to the footer's navy-dark and give cards
+a navy tone (instead of gray) so they read as part of the same dark
+family. Drop the "Specialist capability..." subtitle. Remove the
+per-card hyperlinks -- cards are now plain, non-clickable elements.
+Bump card heading/body text size and weight so it reads clearly.
+Icons switch from red to white.
+
+Cards now slide in from the left as they scroll into view, reusing
+the site's existing content-reveal scroll system (same
+IntersectionObserver, no new one) with a horizontal slide-in variant
+scoped to these cards, a staggered per-card delay, and its own faster
+700ms pace so the entrance feels snappy rather than the slower 3s
+pace the rest of the site's headings use.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ index.html | 28 ++++++++++++----------------
+ site.js    |  8 +++++++-
+ styles.css | 46 ++++++++++++++++++++++++++++++++--------------
+ 3 files changed, 51 insertions(+), 31 deletions(-)
+
+diff --git a/index.html b/index.html
+index 9f68ff4..b2a6d44 100644
+--- a/index.html
++++ b/index.html
+@@ -351,13 +351,9 @@
+         <div class="container">
+           <div class="section-heading centered-heading">
+             <h2>Our Expertise</h2>
+-            <p>
+-              Specialist capability at every stage of the chip development
+-              lifecycle.
+-            </p>
+           </div>
+           <div class="expertise-showcase-grid">
+-            <a class="expertise-showcase-card" href="architecture-planning.html">
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <path d="m12 2 10 5-10 5L2 7Z"></path>
+@@ -371,8 +367,8 @@
+                 before implementation begins, so every later decision has a
+                 foundation.
+               </p>
+-            </a>
+-            <a class="expertise-showcase-card" href="ip-selection.html">
++            </article>
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <path d="M9 17H7A5 5 0 0 1 7 7h2"></path>
+@@ -385,8 +381,8 @@
+                 Qualify processor, interface, and memory IP against your
+                 requirements, then plan integration and vendor coordination.
+               </p>
+-            </a>
+-            <a class="expertise-showcase-card" href="design-verification.html">
++            </article>
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <path
+@@ -400,8 +396,8 @@
+                 Catch functional issues before silicon with simulation,
+                 formal methods, coverage analysis, and emulation.
+               </p>
+-            </a>
+-            <a class="expertise-showcase-card" href="analog-design.html">
++            </article>
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <path d="M22 12h-4l-3 9L9 3l-3 9H2"></path>
+@@ -412,8 +408,8 @@
+                 Transistor-level analog and mixed-signal circuits, balanced
+                 for performance, power, and area on your target process.
+               </p>
+-            </a>
+-            <a class="expertise-showcase-card" href="physical-design.html">
++            </article>
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <rect width="7" height="7" x="3" y="3" rx="1"></rect>
+@@ -427,8 +423,8 @@
+                 Floorplan, place-and-route, and timing closure that turn a
+                 verified netlist into sign-off-ready silicon.
+               </p>
+-            </a>
+-            <a class="expertise-showcase-card" href="chip-design.html">
++            </article>
++            <article class="expertise-showcase-card">
+               <span class="expertise-showcase-icon" aria-hidden="true">
+                 <svg viewBox="0 0 24 24">
+                   <rect width="16" height="16" x="4" y="4" rx="2"></rect>
+@@ -443,7 +439,7 @@
+                 Architecture, IP, verification, analog, and physical design
+                 under a single engineering engagement, start to finish.
+               </p>
+-            </a>
++            </article>
+           </div>
+         </div>
+       </section>
+diff --git a/site.js b/site.js
+index 8f68456..e456644 100644
+--- a/site.js
++++ b/site.js
+@@ -22,10 +22,16 @@
+     }, { threshold: 0.15 });
+ 
+     document.querySelectorAll(
+-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row",
++      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card",
+     ).forEach((element) => {
+       // Flip cards and carousel slides already have their own transitions.
+       if (element.closest(".stat-card, .expertise-slide")) return;
++      // The card itself handles its own entrance; skip its inner heading.
++      if (
++        element.matches("h1, h2, h3") &&
++        element.closest(".expertise-showcase-card")
++      )
++        return;
+       if (element.matches(".lede")) {
+         element.style.setProperty("--reveal-delay", "100ms");
+       } else if (element.matches(".hero-badge-row")) {
+diff --git a/styles.css b/styles.css
+index c2c1a3a..6314007 100644
+--- a/styles.css
++++ b/styles.css
+@@ -2005,6 +2005,9 @@ h3 {
+   .content-reveal:focus-within {
+     animation: none;
+   }
++  .expertise-showcase-card.content-reveal {
++    animation-name: expertise-card-slide-in;
++  }
+ }
+ @keyframes content-rise {
+   from {
+@@ -2016,6 +2019,16 @@ h3 {
+     transform: translateY(0);
+   }
+ }
++@keyframes expertise-card-slide-in {
++  from {
++    opacity: 0;
++    transform: translateX(-32px);
++  }
++  to {
++    opacity: 1;
++    transform: translateX(0);
++  }
++}
+ @keyframes ecosystem-rise {
+   from {
+     opacity: 0;
+@@ -3154,7 +3167,8 @@ h3 {
+   position: relative;
+   isolation: isolate;
+   overflow: hidden;
+-  background: #0d0d10;
++  background: var(--navy-dark);
++  --motion-reveal: 700ms cubic-bezier(0.2, 0.7, 0.2, 1);
+ }
+ .expertise-showcase::before {
+   content: "";
+@@ -3171,29 +3185,32 @@ h3 {
+ .expertise-showcase .centered-heading h2 {
+   color: #fff;
+ }
+-.expertise-showcase .centered-heading p {
+-  color: #9a9aa5;
+-}
+ .expertise-showcase-grid {
+   display: grid;
+   grid-template-columns: repeat(3, 1fr);
+   gap: 24px;
+   margin-top: 48px;
+ }
++.expertise-showcase-grid > :nth-child(1) { --reveal-delay: 0ms; }
++.expertise-showcase-grid > :nth-child(2) { --reveal-delay: 80ms; }
++.expertise-showcase-grid > :nth-child(3) { --reveal-delay: 160ms; }
++.expertise-showcase-grid > :nth-child(4) { --reveal-delay: 80ms; }
++.expertise-showcase-grid > :nth-child(5) { --reveal-delay: 160ms; }
++.expertise-showcase-grid > :nth-child(6) { --reveal-delay: 240ms; }
+ .expertise-showcase-card {
+   display: block;
+   padding: 32px 28px;
+   border-radius: 14px;
+-  background: #17171c;
+-  border: 1px solid #2a2a32;
++  background: var(--navy);
++  border: 1px solid #1e3a5f;
+   transition:
+     border-color var(--motion-smooth),
+     background-color var(--motion-smooth),
+     transform var(--motion-smooth);
+ }
+ .expertise-showcase-card:hover {
+-  border-color: #3a4a63;
+-  background: #1c1c22;
++  border-color: #3a6ea8;
++  background: #15375f;
+   transform: translateY(-4px);
+ }
+ .expertise-showcase-icon {
+@@ -3201,7 +3218,7 @@ h3 {
+   align-items: center;
+   justify-content: center;
+   margin-bottom: 20px;
+-  color: var(--red);
++  color: #fff;
+ }
+ .expertise-showcase-icon svg {
+   width: 40px;
+@@ -3214,14 +3231,15 @@ h3 {
+ }
+ .expertise-showcase-card h3 {
+   color: #fff;
+-  font-size: 1.3125rem;
+-  font-weight: 700;
++  font-size: 1.5rem;
++  font-weight: 800;
+   max-width: none;
+-  margin-bottom: 12px;
++  margin-bottom: 14px;
+ }
+ .expertise-showcase-card p {
+-  color: #9a9aa5;
+-  font-size: 0.9375rem;
++  color: #c2d2e2;
++  font-size: 1.0625rem;
++  font-weight: 500;
+   line-height: 1.6;
+ }
+ @media (max-width: 900px) {
+-- 
+2.43.0
+

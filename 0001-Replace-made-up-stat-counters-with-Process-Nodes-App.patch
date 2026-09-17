@@ -1,0 +1,315 @@
+From 5a77e5a0a80286ce41b066d41bce3025735b9c84 Mon Sep 17 00:00:00 2001
+From: Claude <noreply@anthropic.com>
+Date: Thu, 17 Sep 2026 07:54:27 +0000
+Subject: [PATCH] Replace made-up stat counters with Process Nodes +
+ Application Fields
+
+The "V-Chip at a glance" counters (75+ engineers, 400+ years combined
+experience, 200+ project releases) were flagged as concerning since
+those figures were estimates, not real numbers. Replaces them with
+two factual-shaped capability lists instead: supported process nodes
+(2nm through 24nm, as badges) and application fields served
+(Automotive, Communication, Industrial, Consumer Electronics,
+Computer & Storage, IoT & Wearables, Medical, each with an icon),
+adapted from the reference layout and notes provided.
+
+Renamed the icon list's class from .application-list to .field-list
+after finding it collided with an existing, differently-styled
+.application-list component used elsewhere on the site (the
+applications-panel on service pages) -- would have silently inherited
+that component's bordered-pill styling otherwise.
+
+Also removed the now-orphaned stat-counter CSS and its count-up
+IntersectionObserver logic in site.js, since nothing references
+data-count-to anymore.
+
+Co-Authored-By: Claude Sonnet 5 <noreply@anthropic.com>
+Claude-Session: https://claude.ai/code/session_01SjcntVjf5Nr2bdomgFdfPu
+---
+ index.html | 104 +++++++++++++++++++++++++++++++++++++----------------
+ site.js    |  38 --------------------
+ styles.css |  83 +++++++++++++++++++++++++++---------------
+ 3 files changed, 128 insertions(+), 97 deletions(-)
+
+diff --git a/index.html b/index.html
+index 3edef21..aafec81 100644
+--- a/index.html
++++ b/index.html
+@@ -228,37 +228,81 @@
+               <h2 id="stats-title">Specialist depth. Connected delivery.</h2>
+             </div>
+             <p class="stats-intro">
+-              Engineering depth and delivery experience, added up across our
+-              Penang team.
++              Process node coverage and the industries our designs ship
++              into.
+             </p>
+-            <div class="stats-grid stats-counters" id="stats-grid">
+-              <article class="stat-counter">
+-                <strong
+-                  class="stat-counter-value"
+-                  data-count-to="75"
+-                  data-suffix="+"
+-                  >0+</strong
+-                >
+-                <span>IC Design engineers</span>
+-              </article>
+-              <article class="stat-counter">
+-                <strong
+-                  class="stat-counter-value"
+-                  data-count-to="400"
+-                  data-suffix="+"
+-                  >0+</strong
+-                >
+-                <span>years of combined experience</span>
+-              </article>
+-              <article class="stat-counter">
+-                <strong
+-                  class="stat-counter-value"
+-                  data-count-to="200"
+-                  data-suffix="+"
+-                  >0+</strong
+-                >
+-                <span>project releases</span>
+-              </article>
++            <div class="capability-block">
++              <p class="capability-label">Process nodes</p>
++              <ul class="node-badges">
++                <li>2nm</li>
++                <li>3nm</li>
++                <li>5nm</li>
++                <li>7nm</li>
++                <li>12nm</li>
++                <li>16nm</li>
++                <li>22nm</li>
++                <li>24nm</li>
++              </ul>
++            </div>
++            <div class="capability-block">
++              <p class="capability-label">Application fields</p>
++              <ul class="field-list">
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <path
++                      d="M19 17h2v-4.5a1 1 0 0 0-.29-.71l-2.5-2.5A1 1 0 0 0 17.5 9H15V6a1 1 0 0 0-1-1H4a1 1 0 0 0-1 1v11h2"
++                    ></path>
++                    <circle cx="7" cy="17" r="2"></circle>
++                    <circle cx="17" cy="17" r="2"></circle>
++                    <path d="M9 17h6"></path>
++                  </svg>
++                  Automotive
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"></path>
++                  </svg>
++                  Communication
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <path
++                      d="M2 20a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V8l-7 5V8l-7 5V4a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2Z"
++                    ></path>
++                  </svg>
++                  Industrial
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <rect x="6" y="2" width="12" height="20" rx="2"></rect>
++                    <line x1="12" y1="18" x2="12.01" y2="18"></line>
++                  </svg>
++                  Consumer Electronics
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <rect x="2" y="4" width="20" height="7" rx="2"></rect>
++                    <rect x="2" y="13" width="20" height="7" rx="2"></rect>
++                    <line x1="6" y1="7.5" x2="6.01" y2="7.5"></line>
++                    <line x1="6" y1="16.5" x2="6.01" y2="16.5"></line>
++                  </svg>
++                  Computer &amp; Storage
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <circle cx="12" cy="12" r="5"></circle>
++                    <path d="M9 7 8.5 4h7L15 7"></path>
++                    <path d="m9 17-.5 3h7l-.5-3"></path>
++                  </svg>
++                  IoT &amp; Wearables
++                </li>
++                <li>
++                  <svg aria-hidden="true" viewBox="0 0 24 24">
++                    <path d="M3 12h4l3 8 4-16 3 8h4"></path>
++                  </svg>
++                  Medical
++                </li>
++              </ul>
+             </div>
+           </section>
+         </div>
+diff --git a/site.js b/site.js
+index eb48978..849f3d2 100644
+--- a/site.js
++++ b/site.js
+@@ -58,44 +58,6 @@
+     });
+   }
+ 
+-  const countMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+-  const counters = document.querySelectorAll("[data-count-to]");
+-  if (counters.length) {
+-    const animateCounter = (element) => {
+-      const target = Number(element.dataset.countTo) || 0;
+-      const suffix = element.dataset.suffix || "";
+-      if (countMotion.matches) {
+-        element.textContent = `${target}${suffix}`;
+-        return;
+-      }
+-      const duration = 1600;
+-      const start = performance.now();
+-      const tick = (now) => {
+-        const progress = Math.min((now - start) / duration, 1);
+-        const eased = 1 - Math.pow(1 - progress, 3);
+-        element.textContent = `${Math.round(target * eased)}${suffix}`;
+-        if (progress < 1) window.requestAnimationFrame(tick);
+-      };
+-      window.requestAnimationFrame(tick);
+-    };
+-
+-    if ("IntersectionObserver" in window) {
+-      const counterObserver = new IntersectionObserver(
+-        (entries) => {
+-          entries.forEach((entry) => {
+-            if (!entry.isIntersecting) return;
+-            animateCounter(entry.target);
+-            counterObserver.unobserve(entry.target);
+-          });
+-        },
+-        { threshold: 0.4 },
+-      );
+-      counters.forEach((counter) => counterObserver.observe(counter));
+-    } else {
+-      counters.forEach(animateCounter);
+-    }
+-  }
+-
+   const revealMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+   if ("IntersectionObserver" in window && !revealMotion.matches) {
+     const headingObserver = new IntersectionObserver((entries) => {
+diff --git a/styles.css b/styles.css
+index 4b593e3..b38b6a7 100644
+--- a/styles.css
++++ b/styles.css
+@@ -2012,34 +2012,63 @@ h3 {
+   font-size: 0.9375rem;
+   line-height: 1.6;
+ }
+-.stats-grid {
++.capability-block {
+   grid-column: 1 / -1;
+-  display: grid;
+-  grid-template-columns: repeat(4, minmax(0, 1fr));
+-  gap: 14px;
++  margin-top: 22px;
+ }
+-.stats-counters {
+-  grid-template-columns: repeat(3, minmax(0, 1fr));
+-  gap: 32px;
++.capability-block:first-of-type {
++  margin-top: 24px;
+ }
+-.stat-counter {
+-  min-width: 0;
++.capability-label {
++  color: #9094a8;
++  font-size: 0.75rem;
++  font-weight: 650;
++  letter-spacing: 0.14em;
++  text-transform: uppercase;
++}
++.node-badges {
+   display: flex;
+-  flex-direction: column;
++  flex-wrap: wrap;
++  gap: 10px;
++  margin-top: 12px;
++  padding: 0;
++  list-style: none;
+ }
+-.stat-counter-value {
+-  color: #72a6ed;
+-  font-size: clamp(2.4rem, 4vw, 3.2rem);
+-  font-weight: 800;
+-  line-height: 1;
+-  letter-spacing: -0.03em;
+-  font-variant-numeric: tabular-nums;
++.node-badges li {
++  padding: 7px 14px;
++  border: 1px solid #ffffff22;
++  border-radius: 20px;
++  background: #ffffff0d;
++  color: #fff;
++  font-size: 0.875rem;
++  font-weight: 700;
++  letter-spacing: -0.01em;
+ }
+-.stat-counter span {
+-  margin-top: 10px;
+-  color: #b7b9c7;
+-  font-size: 0.9375rem;
+-  line-height: 1.4;
++.field-list {
++  display: grid;
++  grid-template-columns: repeat(2, minmax(0, 1fr));
++  gap: 10px 18px;
++  margin-top: 12px;
++  padding: 0;
++  list-style: none;
++}
++.field-list li {
++  display: flex;
++  align-items: center;
++  gap: 10px;
++  color: #d6d8e4;
++  font-size: 0.875rem;
++  font-weight: 600;
++}
++.field-list svg {
++  flex-shrink: 0;
++  width: 20px;
++  height: 20px;
++  fill: none;
++  stroke: #72a6ed;
++  stroke-width: 1.8;
++  stroke-linecap: round;
++  stroke-linejoin: round;
+ }
+ .hero-diagram {
+   border-radius: 14px;
+@@ -2625,13 +2654,6 @@ h3 {
+   .stats-panel {
+     grid-template-columns: minmax(0, 1fr);
+   }
+-  .stats-grid {
+-    grid-template-columns: repeat(2, minmax(0, 1fr));
+-  }
+-  .stats-counters {
+-    grid-template-columns: minmax(0, 1fr);
+-    gap: 24px;
+-  }
+   .welcome-grid .hero-diagram {
+     max-width: 560px;
+   }
+@@ -2694,6 +2716,9 @@ h3 {
+   .ecosystem-grid {
+     grid-template-columns: minmax(0, 1fr);
+   }
++  .field-list {
++    grid-template-columns: minmax(0, 1fr);
++  }
+   .header-inner {
+     min-height: 74px;
+   }
+-- 
+2.43.0
+
