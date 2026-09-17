@@ -2020,24 +2020,12 @@ h3 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
 }
-.node-badges {
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  gap: 10px;
+.node-sentence {
   margin-top: 14px;
-  padding: 0;
-  list-style: none;
-}
-.node-badges li {
-  padding: 7px 14px;
-  border: 1px solid #ffffff22;
-  border-radius: 20px;
-  background: #ffffff0d;
   color: #fff;
-  font-size: 0.875rem;
+  font-size: 1.0625rem;
   font-weight: 700;
-  letter-spacing: -0.01em;
-  text-align: center;
+  line-height: 1.55;
 }
 .field-list {
   display: grid;
