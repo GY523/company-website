@@ -11,6 +11,53 @@
     ecosystemObserver.observe(ecosystemPanel);
   }
 
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    const statusEl = contactForm.querySelector(".form-status");
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    const honeypot = contactForm.querySelector(".form-honeypot");
+
+    const showStatus = (message, isError) => {
+      statusEl.textContent = message;
+      statusEl.classList.toggle("is-success", !isError);
+      statusEl.classList.toggle("is-error", isError);
+      statusEl.hidden = false;
+    };
+
+    contactForm.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      if (honeypot && honeypot.checked) return;
+
+      submitButton.disabled = true;
+      statusEl.hidden = true;
+
+      try {
+        const response = await fetch(contactForm.action, {
+          method: "POST",
+          headers: { Accept: "application/json" },
+          body: new FormData(contactForm),
+        });
+        const result = await response.json();
+        if (response.ok && result.success) {
+          showStatus(
+            "Thanks! We've received your message and will get back to you soon.",
+            false,
+          );
+          contactForm.reset();
+        } else {
+          throw new Error(result.message || "Submission failed.");
+        }
+      } catch (error) {
+        showStatus(
+          "Something went wrong sending your message. Please email us directly at vchip_pg@vchip-global.com.",
+          true,
+        );
+      } finally {
+        submitButton.disabled = false;
+      }
+    });
+  }
+
   const countMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
   const counters = document.querySelectorAll("[data-count-to]");
   if (counters.length) {
