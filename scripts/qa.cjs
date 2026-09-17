@@ -11,6 +11,7 @@ const pages = [
   "design-verification.html",
   "analog-design.html",
   "physical-design.html",
+  "our-services.html",
   "chip-design.html",
   "ip-product-development.html",
   "about.html",
