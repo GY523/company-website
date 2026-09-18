@@ -10,6 +10,12 @@
    >
     <meta name="theme-color" content="#102d50">
     <link rel="icon" type="image/png" href="assets/images/favicon.png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&display=swap"
+      rel="stylesheet"
+    >
     <link rel="stylesheet" href="styles.css">
     <script src="site.js" defer></script>
   </head>
@@ -99,28 +105,42 @@
           </p>
         </div>
       </section>
-      <section class="section">
+      <section class="section newspaper-section">
         <div class="container">
-          <div class="section-heading centered-heading">
-            <p class="eyebrow">Straight from LinkedIn</p>
-            <h2>Latest updates from V-Chip Penang</h2>
-            <p>
-              Milestones, hires, and project highlights, posted by our team
-              on LinkedIn.
+          <header class="newspaper-masthead">
+            <p class="newspaper-eyebrow-row">
+              <span>Company Bulletin</span>
+              <span>Penang Edition</span>
             </p>
+            <h2 class="newspaper-title">The V-Chip Times</h2>
+            <p class="newspaper-subtitle">
+              Straight from our LinkedIn page &mdash; milestones, hires, and
+              project highlights.
+            </p>
+            <div class="newspaper-rule newspaper-rule--thick"></div>
+            <div class="newspaper-rule newspaper-rule--thin"></div>
+          </header>
+          <div class="newspaper-grid">
+            <article class="newspaper-article">
+              <p class="newspaper-kicker">Dispatch No. 01</p>
+              <div class="linkedin-embed">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7505190876319645696?collapsed=1" height="542" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
+              </div>
+            </article>
+            <article class="newspaper-article">
+              <p class="newspaper-kicker">Dispatch No. 02</p>
+              <div class="linkedin-embed">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500824471608557568?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
+              </div>
+            </article>
+            <article class="newspaper-article">
+              <p class="newspaper-kicker">Dispatch No. 03</p>
+              <div class="linkedin-embed">
+                <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7452267851345788929?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
+              </div>
+            </article>
           </div>
-          <div class="linkedin-feed">
-            <div class="linkedin-embed">
-              <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7505190876319645696?collapsed=1" height="542" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
-            </div>
-            <div class="linkedin-embed">
-              <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7500824471608557568?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
-            </div>
-            <div class="linkedin-embed">
-              <iframe src="https://www.linkedin.com/embed/feed/update/urn:li:ugcPost:7452267851345788929?collapsed=1" height="628" width="504" frameborder="0" allowfullscreen title="Embedded post"></iframe>
-            </div>
-          </div>
-          <p class="linkedin-more">
+          <p class="newspaper-more">
             <a
               class="text-link"
               href="https://www.linkedin.com/company/vchip-penang/posts/"

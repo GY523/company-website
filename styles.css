@@ -638,15 +638,8 @@ main:focus {
 .breadcrumb a {
   transition: color var(--motion-fast);
 }
-.linkedin-feed {
-  display: grid;
-  grid-template-columns: repeat(3, minmax(0, 1fr));
-  align-items: start;
-  gap: 24px;
-  margin-top: 48px;
-}
 .linkedin-embed {
-  border-radius: 14px;
+  border-radius: 6px;
   overflow: hidden;
 }
 .linkedin-embed:empty {
@@ -669,7 +662,84 @@ main:focus {
   width: 100%;
   border: none;
 }
-.linkedin-more {
+.newspaper-section {
+  background: #f7f2e7;
+  border-block: 1px solid var(--line);
+}
+.newspaper-masthead {
+  max-width: 900px;
+  margin: 0 auto 44px;
+  text-align: center;
+  color: #1a1a1a;
+}
+.newspaper-eyebrow-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid #1a1a1a4d;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #6b675c;
+}
+.newspaper-title {
+  margin: 0;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: clamp(2.5rem, 6vw, 4.25rem);
+  font-weight: 900;
+  letter-spacing: 0.005em;
+  line-height: 1;
+  color: #1a1a1a;
+}
+.newspaper-subtitle {
+  margin: 14px auto 0;
+  max-width: 46ch;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 0.9375rem;
+  font-style: italic;
+  color: #6b675c;
+}
+.newspaper-rule {
+  margin: 18px auto 0;
+  background: #1a1a1a;
+}
+.newspaper-rule--thick {
+  height: 4px;
+}
+.newspaper-rule--thin {
+  height: 1px;
+  margin-top: 4px;
+}
+.newspaper-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 0;
+  border-top: 1px solid #1a1a1a33;
+}
+.newspaper-article {
+  padding: 28px;
+  border-right: 1px solid #1a1a1a33;
+}
+.newspaper-article:last-child {
+  border-right: none;
+}
+.newspaper-kicker {
+  margin: 0 0 16px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid #1a1a1a;
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 1.0625rem;
+  font-weight: 700;
+  font-style: italic;
+  color: #1a1a1a;
+}
+.newspaper-article .linkedin-embed {
+  border: 1px solid #1a1a1a26;
+}
+.newspaper-more {
   margin-top: 40px;
   text-align: center;
 }
@@ -1433,8 +1503,20 @@ main:focus {
   .section {
     padding-block: 64px;
   }
-  .linkedin-feed {
+  .newspaper-grid {
     grid-template-columns: minmax(0, 1fr);
+    border-top: none;
+  }
+  .newspaper-article {
+    padding: 22px 0;
+    border-right: none;
+    border-bottom: 1px solid #1a1a1a33;
+  }
+  .newspaper-article:first-child {
+    border-top: 1px solid #1a1a1a33;
+  }
+  .newspaper-eyebrow-row {
+    font-size: 0.625rem;
   }
   .hero-grid {
     grid-template-columns: 1fr;
