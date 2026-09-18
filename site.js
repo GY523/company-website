@@ -49,7 +49,7 @@
         }
       } catch (error) {
         showStatus(
-          "Something went wrong sending your message. Please email us directly at vchip_pg@vchip-global.com.",
+          "Something went wrong sending your message. Please email us directly at vchip_inquiry@vchip.com.my.",
           true,
         );
       } finally {
