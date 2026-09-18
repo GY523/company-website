@@ -85,7 +85,7 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll(
-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card, .section-band-navy .engagement-grid--cards > article, .expertise-overview-card, .node-track",
+      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card, .section-band-navy .engagement-grid--cards > article, .node-track",
     ).forEach((element) => {
       // Carousel slides already have their own transitions.
       if (element.closest(".expertise-slide")) return;

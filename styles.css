@@ -2004,128 +2004,25 @@ h3 {
   }
 }
 .expertise-overview {
-  background: var(--surface);
+  background: var(--navy-dark);
 }
-.expertise-overview-grid {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  gap: 24px;
-  margin-top: 56px;
-}
-.expertise-overview-card {
-  padding: 32px 26px;
-  border: 1px solid #e6e6ef;
-  border-radius: 14px;
-  background: #fff;
-  box-shadow: 0 10px 26px -22px #17203614;
-  --reveal-delay: 0ms;
-  transition:
-    border-color var(--motion-fast),
-    box-shadow var(--motion-smooth),
-    transform var(--motion-smooth);
-}
-.expertise-overview-card:hover {
-  border-color: #c7d3e6;
-  box-shadow: 0 16px 34px -20px #17203622;
-  transform: translateY(-4px);
-}
-.expertise-overview-card:nth-child(2) {
-  --reveal-delay: 100ms;
-}
-.expertise-overview-card:nth-child(3) {
-  --reveal-delay: 200ms;
-}
-.expertise-overview-card:nth-child(4) {
-  --reveal-delay: 300ms;
-}
-.expertise-overview-icon {
-  display: inline-flex;
-  align-items: center;
+.node-experience .centered-heading .eyebrow {
   justify-content: center;
-  width: 44px;
-  height: 44px;
-  margin-bottom: 20px;
-  border-radius: 10px;
+  color: #9094a8;
 }
-.expertise-overview-icon svg {
-  width: 22px;
-  height: 22px;
-  fill: none;
-  stroke: currentColor;
-  stroke-width: 1.8;
-  stroke-linecap: round;
-  stroke-linejoin: round;
+.node-experience .centered-heading h2 {
+  color: #fff;
 }
-.expertise-overview-card--architecture .expertise-overview-icon {
-  background: #fdf1e6;
-  color: #c9822f;
-}
-.expertise-overview-card--frontend .expertise-overview-icon {
-  background: #e8f0fc;
-  color: #3f7fd1;
-}
-.expertise-overview-card--physical .expertise-overview-icon {
-  background: #e7f7ef;
-  color: #2f9e6f;
-}
-.expertise-overview-card--verification .expertise-overview-icon {
-  background: #f2ecfc;
-  color: #8b5fd6;
-}
-.expertise-overview-card h3 {
-  margin-bottom: 16px;
-  color: var(--text);
-  font-size: 1.0625rem;
-  font-weight: 700;
-  max-width: none;
-}
-.expertise-overview-card ul {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-.expertise-overview-card li {
-  position: relative;
-  padding-left: 16px;
-  color: var(--muted);
-  font-size: 0.875rem;
-  line-height: 1.5;
-}
-.expertise-overview-card li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.6em;
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  background: #c7cbd8;
-}
-.node-experience {
-  margin-top: 72px;
-  padding-top: 56px;
-  border-top: 1px solid var(--line);
-}
-.node-experience-heading {
-  text-align: center;
-}
-.node-experience-heading .eyebrow {
-  justify-content: center;
-  color: var(--muted);
-}
-.node-experience-heading .section-copy {
-  margin: 12px auto 0;
+.node-experience .centered-heading > p:last-child {
+  color: #b7b9c7;
 }
 .node-track {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: clamp(16px, 4vw, 56px);
-  max-width: 720px;
+  gap: clamp(12px, 2.5vw, 32px);
+  max-width: 960px;
   margin: 48px auto 0;
   padding: 0;
   list-style: none;
@@ -2140,8 +2037,8 @@ h3 {
   background: linear-gradient(
     90deg,
     transparent,
-    #d5dae6 12%,
-    #d5dae6 88%,
+    #ffffff26 12%,
+    #ffffff26 88%,
     transparent
   );
   transform: translateY(-50%);
@@ -2155,13 +2052,13 @@ h3 {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  min-width: 76px;
+  min-width: 72px;
   height: 56px;
-  padding: 0 18px;
-  border: 1px solid #dfe3ee;
+  padding: 0 16px;
+  border: 1px solid #ffffff1a;
   border-radius: 999px;
   background: #fff;
-  box-shadow: 0 8px 20px -12px #17203630;
+  box-shadow: 0 10px 24px -10px #00000055;
   color: var(--navy);
   font-size: 1.0625rem;
   font-weight: 800;
@@ -2760,11 +2657,12 @@ h3 {
   .welcome-copy .button {
     margin-top: 4px;
   }
-  .expertise-overview-grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
   .node-track {
-    gap: clamp(12px, 3vw, 32px);
+    flex-wrap: wrap;
+    row-gap: 18px;
+  }
+  .node-track::before {
+    display: none;
   }
   .welcome-grid .hero-diagram {
     max-width: 560px;
@@ -2828,16 +2726,6 @@ h3 {
   .ecosystem-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .expertise-overview-grid {
-    grid-template-columns: minmax(0, 1fr);
-  }
-  .node-track {
-    flex-wrap: wrap;
-    row-gap: 16px;
-  }
-  .node-track::before {
-    display: none;
-  }
   .header-inner {
     min-height: 74px;
   }
@@ -2868,9 +2756,6 @@ h3 {
   }
   .applications-panel {
     padding: 30px;
-  }
-  .expertise-overview-card {
-    padding: 24px 22px;
   }
   .applications-panel h3 {
     font-size: 2rem;
