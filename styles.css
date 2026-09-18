@@ -1958,33 +1958,69 @@ h3 {
   font-weight: 700;
   line-height: 1.55;
 }
-.field-list {
+.expertise-grid {
   flex: 1;
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  align-content: space-evenly;
-  gap: 20px 18px;
-  margin-top: 14px;
-  padding: 0;
-  list-style: none;
-}
-.field-list li {
-  display: flex;
-  align-items: center;
+  align-content: center;
   gap: 12px;
-  color: #d6d8e4;
-  font-size: 1rem;
-  font-weight: 600;
+  margin-top: 14px;
 }
-.field-list svg {
-  flex-shrink: 0;
-  width: 24px;
-  height: 24px;
+.expertise-mini-card {
+  padding: 14px;
+  border: 1px solid #ffffff1a;
+  border-radius: 12px;
+  background: #ffffff08;
+}
+.expertise-mini-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: #fff;
+}
+.expertise-mini-icon svg {
+  width: 18px;
+  height: 18px;
   fill: none;
-  stroke: #72a6ed;
+  stroke: currentColor;
   stroke-width: 1.8;
   stroke-linecap: round;
   stroke-linejoin: round;
+}
+.expertise-mini-card--architecture .expertise-mini-icon {
+  background: #c9822f;
+}
+.expertise-mini-card--frontend .expertise-mini-icon {
+  background: #3f7fd1;
+}
+.expertise-mini-card--physical .expertise-mini-icon {
+  background: #2f9e6f;
+}
+.expertise-mini-card--verification .expertise-mini-icon {
+  background: #8b5fd6;
+}
+.expertise-mini-title {
+  margin: 0 0 8px;
+  color: #fff;
+  font-size: 0.9375rem;
+  font-weight: 700;
+}
+.expertise-mini-list {
+  margin: 0;
+  padding-left: 16px;
+  color: #b7b9c7;
+  font-size: 0.75rem;
+  line-height: 1.5;
+}
+.expertise-mini-list li {
+  margin-bottom: 3px;
+}
+.expertise-mini-list li:last-child {
+  margin-bottom: 0;
 }
 .hero-diagram {
   border-radius: 14px;
@@ -2640,7 +2676,7 @@ h3 {
   .ecosystem-grid {
     grid-template-columns: minmax(0, 1fr);
   }
-  .field-list {
+  .expertise-grid {
     grid-template-columns: minmax(0, 1fr);
   }
   .header-inner {
