@@ -69,14 +69,14 @@
     }, { threshold: 0.15 });
 
     document.querySelectorAll(
-      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card, .section-band-navy .engagement-grid--cards > article, .stats-cell",
+      "main h1, main h2, main h3, .v1-hero .lede, .v1-hero .button-row, .page-hero .lede, .page-hero-video .eyebrow, .page-hero-video .hero-badge-row, .page-hero-video .button-row, .expertise-showcase-card, .section-band-navy .engagement-grid--cards > article",
     ).forEach((element) => {
       // Carousel slides already have their own transitions.
       if (element.closest(".expertise-slide")) return;
       // The card itself handles its own entrance; skip its inner heading.
       if (
         element.matches("h1, h2, h3") &&
-        element.closest(".expertise-showcase-card, .engagement-grid--cards > article, .stats-cell")
+        element.closest(".expertise-showcase-card, .engagement-grid--cards > article")
       )
         return;
       if (element.matches(".lede")) {
@@ -99,6 +99,25 @@
       });
     });
   }
+
+  document.querySelectorAll(".career-row[aria-controls]").forEach((toggle) => {
+    const panel = document.getElementById(toggle.getAttribute("aria-controls"));
+    if (!panel) return;
+    toggle.addEventListener("click", () => {
+      const open = toggle.getAttribute("aria-expanded") === "true";
+      if (open) {
+        toggle.setAttribute("aria-expanded", "false");
+        panel.classList.remove("is-open");
+        window.setTimeout(() => {
+          if (toggle.getAttribute("aria-expanded") !== "true") panel.hidden = true;
+        }, 260);
+      } else {
+        panel.hidden = false;
+        toggle.setAttribute("aria-expanded", "true");
+        window.requestAnimationFrame(() => panel.classList.add("is-open"));
+      }
+    });
+  });
 
   const scrollTopButton = document.querySelector("[data-scroll-top]");
   if (scrollTopButton) {
