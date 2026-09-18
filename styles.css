@@ -645,11 +645,6 @@ main:focus {
   gap: 24px;
   margin-top: 48px;
 }
-.linkedin-post {
-  display: flex;
-  flex-direction: column;
-  gap: 14px;
-}
 .linkedin-embed {
   border-radius: 14px;
   overflow: hidden;
@@ -673,12 +668,6 @@ main:focus {
   display: block;
   width: 100%;
   border: none;
-}
-.linkedin-date {
-  color: var(--muted);
-  font-size: 0.8125rem;
-  font-weight: 650;
-  text-align: center;
 }
 .linkedin-more {
   margin-top: 40px;
