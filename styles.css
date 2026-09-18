@@ -1521,6 +1521,9 @@ main:focus {
   .footer-brand {
     grid-column: 1/-1;
   }
+  .footer-grid > div:last-child {
+    grid-column: 1/-1;
+  }
   .footer-bottom {
     flex-direction: column;
     gap: 10px;
