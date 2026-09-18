@@ -51,7 +51,6 @@
 .service-handoff { margin-top: 32px; padding: 24px 28px; background: var(--surface); border-left: 3px solid var(--blue); display: grid; grid-template-columns: 180px 1fr; gap: 24px; }
 .service-handoff h3 { font-size: 1rem; line-height: 1.6; }
 .service-handoff p { color: var(--muted); font-size: .88rem; }
-.service-draft { display: inline-block; padding: 5px 10px; color: #795320; background: #fff2d9; border: 1px solid #e9c991; font-size: .75rem; margin-bottom: 16px; border-radius: 3px; }
 @media (max-width: 800px) {
   .services-hero { padding-block: 56px; }
   .services-browser { padding-block: 40px 56px; }
