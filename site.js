@@ -29,8 +29,24 @@
         if (formHint) formHint.hidden = true;
         window.requestAnimationFrame(() => moreFields.classList.add("is-open"));
       };
+      const collapseForm = () => {
+        if (!expanded) return;
+        expanded = false;
+        moreFields.classList.remove("is-open");
+        if (formHint) formHint.hidden = false;
+        window.setTimeout(() => {
+          if (!expanded) moreFields.hidden = true;
+        }, 260);
+      };
       nameInput.addEventListener("focus", expandForm);
       nameInput.addEventListener("input", expandForm);
+      nameInput.addEventListener("blur", () => {
+        window.setTimeout(() => {
+          if (!nameInput.value.trim() && !contactForm.contains(document.activeElement)) {
+            collapseForm();
+          }
+        }, 120);
+      });
     }
 
     const showStatus = (message, isError) => {
