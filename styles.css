@@ -2568,7 +2568,8 @@ h3 {
   color: #c4c4d7;
 }
 .page-hero-physical,
-.page-hero-analog {
+.page-hero-analog,
+.page-hero-generic {
   position: relative;
   isolation: isolate;
   background-position: center;
@@ -2584,8 +2585,15 @@ h3 {
     linear-gradient(100deg, #0e1126ed 8%, #171a36d1 52%, #0e1126c4 100%),
     url("assets/images/v-chip-expertise-custom-analog-design.webp");
 }
+.page-hero-generic {
+  background-position: center 56%;
+  background-image:
+    linear-gradient(100deg, #0e1126ed 8%, #171a36d1 52%, #0e1126c4 100%),
+    url("assets/images/home-background.jpg");
+}
 .page-hero-physical h1,
-.page-hero-analog h1 {
+.page-hero-analog h1,
+.page-hero-generic h1 {
   text-shadow: 0 2px 20px #05050c99;
 }
 .deliverables,
