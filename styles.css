@@ -920,6 +920,31 @@ main:focus {
   gap: 18px;
   margin-top: 26px;
 }
+.form-hint {
+  margin-top: -6px;
+  color: var(--blue);
+  font-size: 0.8125rem;
+  font-weight: 650;
+}
+.form-hint span {
+  display: inline-block;
+  transition: transform var(--motion-fast);
+}
+.form-more {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--motion-smooth);
+}
+.form-more.is-open {
+  grid-template-rows: 1fr;
+}
+.form-more-inner {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  min-height: 0;
+  overflow: hidden;
+}
 .form-field {
   display: flex;
   flex-direction: column;

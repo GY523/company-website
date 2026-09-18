@@ -16,6 +16,22 @@
     const statusEl = contactForm.querySelector(".form-status");
     const submitButton = contactForm.querySelector('button[type="submit"]');
     const honeypot = contactForm.querySelector(".form-honeypot");
+    const nameInput = contactForm.querySelector("#contact-name");
+    const moreFields = contactForm.querySelector("#contact-form-more");
+    const formHint = contactForm.querySelector("#contact-form-hint");
+
+    if (nameInput && moreFields) {
+      let expanded = false;
+      const expandForm = () => {
+        if (expanded) return;
+        expanded = true;
+        moreFields.hidden = false;
+        if (formHint) formHint.hidden = true;
+        window.requestAnimationFrame(() => moreFields.classList.add("is-open"));
+      };
+      nameInput.addEventListener("focus", expandForm);
+      nameInput.addEventListener("input", expandForm);
+    }
 
     const showStatus = (message, isError) => {
       statusEl.textContent = message;
