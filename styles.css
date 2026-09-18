@@ -666,9 +666,15 @@ main:focus {
   background: #f7f2e7;
   border-block: 1px solid var(--line);
 }
+.newspaper-frame {
+  padding: clamp(24px, 4vw, 48px);
+  border: 1px solid #1a1a1a;
+  outline: 1px solid #1a1a1a;
+  outline-offset: 6px;
+}
 .newspaper-masthead {
   max-width: 900px;
-  margin: 0 auto 44px;
+  margin: 0 auto 32px;
   text-align: center;
   color: #1a1a1a;
 }
@@ -713,6 +719,14 @@ main:focus {
   height: 1px;
   margin-top: 4px;
 }
+.newspaper-dateline {
+  margin: 12px 0 0;
+  font-size: 0.75rem;
+  font-weight: 650;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #6b675c;
+}
 .newspaper-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -735,6 +749,11 @@ main:focus {
   font-weight: 700;
   font-style: italic;
   color: #1a1a1a;
+}
+.newspaper-article--lead .newspaper-kicker {
+  font-size: 1.375rem;
+  font-style: normal;
+  border-bottom-width: 3px;
 }
 .newspaper-article .linkedin-embed {
   border: 1px solid #1a1a1a26;
