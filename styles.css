@@ -719,14 +719,6 @@ main:focus {
   height: 1px;
   margin-top: 4px;
 }
-.newspaper-dateline {
-  margin: 12px 0 0;
-  font-size: 0.75rem;
-  font-weight: 650;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: #6b675c;
-}
 .newspaper-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -739,21 +731,6 @@ main:focus {
 }
 .newspaper-article:last-child {
   border-right: none;
-}
-.newspaper-kicker {
-  margin: 0 0 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid #1a1a1a;
-  font-family: "Playfair Display", Georgia, serif;
-  font-size: 1.0625rem;
-  font-weight: 700;
-  font-style: italic;
-  color: #1a1a1a;
-}
-.newspaper-article--lead .newspaper-kicker {
-  font-size: 1.375rem;
-  font-style: normal;
-  border-bottom-width: 3px;
 }
 .newspaper-article .linkedin-embed {
   border: 1px solid #1a1a1a26;
