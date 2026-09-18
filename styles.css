@@ -703,6 +703,10 @@ main:focus {
 }
 /* Inner pages */
 .page-hero {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-items: center;
   padding-block: 34px 64px;
   background: var(--surface);
   border-bottom: 1px solid var(--line);

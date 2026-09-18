@@ -1,4 +1,8 @@
 .services-hero {
+  display: flex;
+  min-height: 100vh;
+  min-height: 100svh;
+  align-items: center;
   padding: 80px 0 88px;
   text-align: center;
   color: #fff;
