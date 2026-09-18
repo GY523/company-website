@@ -2003,6 +2003,9 @@ h3 {
     transform: translateX(calc(-100% - var(--trust-cycle-gap)));
   }
 }
+.expertise-overview {
+  background: var(--surface);
+}
 .expertise-overview-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
